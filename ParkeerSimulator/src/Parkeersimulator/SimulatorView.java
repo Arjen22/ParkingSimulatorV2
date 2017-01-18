@@ -1,7 +1,8 @@
+// @author Prior IT
+// @version 0.1
 package Parkeersimulator;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
