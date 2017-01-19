@@ -29,6 +29,7 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
+    // Constructor of simulator 
     public Simulator() {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
@@ -36,13 +37,15 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
     }
-
+    
+    // Method of running the simulator
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
         }
     }
-
+    
+    // Method of counting the time for updating the view.
     private void tick() {
     	advanceTime();
     	handleExit();
@@ -55,7 +58,8 @@ public class Simulator {
         }
     	handleEntrance();
     }
-
+    
+    // Method for advancing the time 
     private void advanceTime(){
         // Advance the time by one minute.
         minute++;
@@ -72,32 +76,39 @@ public class Simulator {
         }
 
     }
-
+    
+    // Method for handling the cars which try to enter the parking garage.
     private void handleEntrance(){
     	carsArriving();
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);  	
     }
     
+    // Method for handling the cars which try to exit the parking garage.
     private void handleExit(){
         carsReadyToLeave();
         carsPaying();
         carsLeaving();
     }
     
+    
+    // Method for updating the screen so the view is up to date.
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
         simulatorView.updateView();	
     }
     
+    // Method for handling the arriving of cars.
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);    	
     }
-
+    
+    
+    // Method for handling the cars who entered the parking garage.
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
