@@ -1,5 +1,6 @@
 // @author Prior IT
-// @version 0.1
+// @version 0.1 Early Alpha
+
 package Parkeersimulator;
 
 import javax.swing.*;
@@ -98,7 +99,7 @@ public class SimulatorView extends JFrame {
         }
         return null;
     }
-
+    
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
