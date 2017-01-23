@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package nl.PriorIT.src.Parkingsimulator;
 
 public class Location {
 

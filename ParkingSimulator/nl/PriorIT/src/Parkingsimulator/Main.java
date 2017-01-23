@@ -1,6 +1,6 @@
 //@author Prior IT
 //@version 0.1 Early Alpha
-package Parkeersimulator;
+package nl.PriorIT.src.Parkingsimulator;
 
 public class Main {
 	//Method for performing the program's core operations

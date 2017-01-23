@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package nl.PriorIT.src.Parkingsimulator;
 import java.util.LinkedList;
 import java.util.Queue;
 
