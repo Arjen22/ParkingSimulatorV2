@@ -10,4 +10,3 @@ public class Main {
 	}
 
 }
-// De saffier is een kostbare edelsteen. Het is transparant korund. Blauwe stenen van goede kwaliteit worden over het algemeen geclassificieerd als een 
