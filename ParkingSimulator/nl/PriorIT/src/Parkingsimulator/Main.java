@@ -1,9 +1,24 @@
-//@author Prior IT
-//@version 0.1 Early Alpha
+    /**
+     * 
+     * @author Prior IT
+     * @version 0.1 Early Alpha
+     * 
+     */
 package nl.PriorIT.src.Parkingsimulator;
 
+/**
+ * 
+ * Constructor of the main class. 
+ */
 public class Main {
-	//Method for performing the program's core operations
+    /**
+     * 
+     * Public method which defines the new simulator view.
+     * @param args
+     * @return nothing
+     * @see Simulator#run()
+     * @see Simulator#Simulator()
+     */
 	public static void main(String[] args) {
 		Simulator simulator = new Simulator();
 		simulator.run();

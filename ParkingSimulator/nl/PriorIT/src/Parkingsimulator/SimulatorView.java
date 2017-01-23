@@ -1,6 +1,7 @@
-// @author Prior IT
-// @version 0.1 Early Alpha
-
+/**
+ * @author Prior IT
+ * @version 0.1 Early Alpha 
+ */
 package nl.PriorIT.src.Parkingsimulator;
 
 import javax.swing.*;
