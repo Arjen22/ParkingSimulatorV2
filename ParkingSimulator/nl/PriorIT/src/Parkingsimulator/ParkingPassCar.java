@@ -1,4 +1,8 @@
-package Parkeersimulator;
+/**
+ * @author Prior IT
+ * @version 0.1 Early Alpha
+ */
+package nl.PriorIT.src.Parkingsimulator;
 
 import java.util.Random;
 import java.awt.*;

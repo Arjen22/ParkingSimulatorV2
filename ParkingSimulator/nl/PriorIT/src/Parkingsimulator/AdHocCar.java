@@ -1,8 +1,13 @@
-package Parkeersimulator;
+package nl.PriorIT.src.Parkingsimulator;
 
 import java.util.Random;
 import java.awt.*;
 
+/**
+ * @author Arjen
+ * @see #tick() 
+ * 
+ */
 public class AdHocCar extends Car {
 	private static final Color COLOR=Color.red;
 	

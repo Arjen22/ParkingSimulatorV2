@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package nl.PriorIT.src.Parkingsimulator;
 
 import java.awt.*;
 
@@ -11,9 +11,11 @@ public abstract class Car {
 
     /**
      * Constructor for objects of class Car
+     * @author Prior IT
+     * @category Feature 
+     * 
      */
     public Car() {
-
     }
 
     public Location getLocation() {

@@ -1,7 +1,12 @@
-package Parkeersimulator;
+package nl.PriorIT.src.Parkingsimulator;
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * Constructor for objects of class Car
+ * @author Prior IT
+ * @category Core Feature
+ * 
+ */
 public class CarQueue {
     private Queue<Car> queue = new LinkedList<>();
 
