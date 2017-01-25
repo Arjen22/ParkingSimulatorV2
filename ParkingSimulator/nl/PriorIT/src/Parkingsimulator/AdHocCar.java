@@ -1,10 +1,11 @@
 package nl.PriorIT.src.Parkingsimulator;
 
+
 import java.util.Random;
 import java.awt.*;
 
 /**
- * @author Arjen
+ * @author Prior IT
  * @see #tick() 
  * 
  */
