@@ -45,7 +45,7 @@ public class Simulator {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30);
+        simulatorView = new SimulatorView(3, 6, 30, 100);
     }
 
     public void run() {
@@ -116,7 +116,7 @@ public class Simulator {
     			simulatorView.getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = simulatorView.getFirstFreeLocation();
+            Location freeLocation = simulatorView.getFirstFreeLocation(car.getHasToPay());
             simulatorView.setCarAt(freeLocation, car);
             i++;
         }

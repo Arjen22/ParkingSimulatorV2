@@ -19,12 +19,16 @@ public class SimulatorView extends JFrame {
     private int numberOfOpenSpots;
     private static int floornumber = 0;
     private Car[][][] cars;
-
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    private int abonnementsPlaatsen;
+    private Location laatsteplek;
+    
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
+        this.abonnementsPlaatsen = abonnementsPlaatsen;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+        
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -56,6 +60,10 @@ public class SimulatorView extends JFrame {
 
     public int getNumberOfOpenSpots(){
     	return numberOfOpenSpots;
+    }
+    
+    public int getAbonnementsPlaatsen() {
+    	return abonnementsPlaatsen;
     }
     
     public Car getCarAt(Location location) {
@@ -93,13 +101,27 @@ public class SimulatorView extends JFrame {
         return car;
     }
 
-    public Location getFirstFreeLocation() {
+    public Location getFirstFreeLocation(boolean paying) {
+    	
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
+                	if (paying == true) {
+                		if(floor <= laatsteplek.getFloor()) {
+                			floor = laatsteplek.getFloor();
+                			if(row <= laatsteplek.getRow()) {
+                				row = laatsteplek.getRow();
+                				if(place<= laatsteplek.getPlace()) {
+                					place = laatsteplek.getPlace() + 1;
+                				}                				            				
+                			}                				
+                		}
+                	}
+                	
                     Location location = new Location(floor, row, place);
-                    if (getCarAt(location) == null) {
-                        return location;
+                    Location check = getCarAt(location) == null ? location : null;
+                    if(check != null) {
+                    	return location;
                     }
                 }
             }
