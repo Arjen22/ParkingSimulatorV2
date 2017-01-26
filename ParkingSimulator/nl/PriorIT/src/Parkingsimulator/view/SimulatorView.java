@@ -30,7 +30,7 @@ public class SimulatorView extends JFrame {
         this.abonnementsPlaatsen = abonnementsPlaatsen;
         abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
-        
+        hoeveelheid = abonnementsPlaatsen;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
