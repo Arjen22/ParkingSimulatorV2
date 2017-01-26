@@ -19,7 +19,7 @@ public class testclass {
      * @param height
      * @return nothing
      */
-    public testclass(int width,int height) {
+    public testclass() {
 	JFrame guiframe = new JFrame("PsimGui");
 	JPanel buttonpanel = new JPanel(new BorderLayout());
 	JButton startbutton = new JButton("Start");
