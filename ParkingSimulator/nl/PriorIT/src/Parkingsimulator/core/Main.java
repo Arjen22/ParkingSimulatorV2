@@ -4,7 +4,10 @@
      * @version 0.1 Early Alpha
      * 
      */
-package nl.PriorIT.src.Parkingsimulator;
+package nl.PriorIT.src.Parkingsimulator.core;
+
+import nl.PriorIT.src.Parkingsimulator.logic.Simulator;
+import nl.PriorIT.src.Parkingsimulator.view.testclass;
 
 /**
  * 

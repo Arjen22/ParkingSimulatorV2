@@ -2,9 +2,16 @@
  * @author Prior IT
  * @version 0.1 Early Alpha 
  */
-package nl.PriorIT.src.Parkingsimulator;
+package nl.PriorIT.src.Parkingsimulator.logic;
 
 import java.util.Random;
+
+import nl.PriorIT.src.Parkingsimulator.maths.AdHocCar;
+import nl.PriorIT.src.Parkingsimulator.maths.Car;
+import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
+import nl.PriorIT.src.Parkingsimulator.maths.Location;
+import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
+import nl.PriorIT.src.Parkingsimulator.view.SimulatorView;
 
 public class Simulator {
 

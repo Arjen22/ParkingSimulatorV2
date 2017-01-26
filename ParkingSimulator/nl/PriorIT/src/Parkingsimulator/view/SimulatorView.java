@@ -2,9 +2,13 @@
  * @author Prior IT
  * @version 0.1 Early Alpha 
  */
-package nl.PriorIT.src.Parkingsimulator;
+package nl.PriorIT.src.Parkingsimulator.view;
 
 import javax.swing.*;
+
+import nl.PriorIT.src.Parkingsimulator.maths.Car;
+import nl.PriorIT.src.Parkingsimulator.maths.Location;
+
 import java.awt.*;
 
 public class SimulatorView extends JFrame {

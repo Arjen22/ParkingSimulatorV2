@@ -1,4 +1,4 @@
-package nl.PriorIT.src.Parkingsimulator;
+package nl.PriorIT.src.Parkingsimulator.view;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
