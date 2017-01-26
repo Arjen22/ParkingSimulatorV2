@@ -17,16 +17,18 @@ public class SimulatorView extends JFrame {
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
-    private static int floornumber = 0;
+//    private static int floornumber = 0;
     private Car[][][] cars;
     private int abonnementsPlaatsen;
     private Location laatsteplek;
+    private int hoeveelheid;
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.abonnementsPlaatsen = abonnementsPlaatsen;
+        abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
@@ -213,13 +215,25 @@ public class SimulatorView extends JFrame {
                 carParkImage = createImage(size.width, size.height);
             }
             Graphics graphics = carParkImage.getGraphics();
+            int openPlekken = getAbonnementsPlaatsen();
             for(int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
-                        Location location = new Location(floor, row, place);
-                        Car car = getCarAt(location);
-                        Color color = car == null ? Color.white : car.getColor();
-                        drawPlace(graphics, location, color);
+                    	Location location = new Location(floor, row, place);
+                    	Car car = getCarAt(location);
+                    	Color color = Color.white;
+                    	if (openPlekken > 0){
+                    		color = car == null ? Color.yellow : car.getColor();
+                    	      if (hoeveelheid > 0){
+                    	    	  laatsteplek = location;
+                    	    	  hoeveelheid--;
+                    	      }
+                    	      openPlekken--;
+                    	}
+                    	else {
+                    		color = car == null ? color : car.getColor();
+                    	}
+                    drawPlace(graphics, location, color);
                     }
                 }
             }
