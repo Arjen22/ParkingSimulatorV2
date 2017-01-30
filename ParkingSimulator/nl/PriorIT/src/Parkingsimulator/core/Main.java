@@ -6,8 +6,8 @@
      */
 package nl.PriorIT.src.Parkingsimulator.core;
 
-import nl.PriorIT.src.Parkingsimulator.logic.Simulator;
-import nl.PriorIT.src.Parkingsimulator.view.testclass;
+import nl.PriorIT.src.Parkingsimulator.logic.Model;
+
 
 /**
  * 
@@ -22,10 +22,11 @@ public class Main {
      * @see Simulator#run()
      * @see Simulator#Simulator()
      */
+    
+
+	
 	public static void main(String[] args) {
-		Simulator simulator = new Simulator();
-		testclass testwindow = new testclass();
-		simulator.run();
+		new Model();
 		
 	}
 
