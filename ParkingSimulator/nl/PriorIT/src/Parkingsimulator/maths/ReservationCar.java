@@ -7,15 +7,15 @@ package nl.PriorIT.src.Parkingsimulator.maths;
 import java.util.Random;
 import java.awt.*;
 
-public class ParkingPassCar extends Car {
-	private static final Color COLOR=Color.blue;
+public class ReservationCar extends Car {
+	private static final Color COLOR=Color.pink;
 	
-    public ParkingPassCar() {
+    public ReservationCar() {
     	Random random = new Random();
     	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
         this.setMinutesLeft(stayMinutes);
-        this.setHasToPay(false);
-        this.setReservation(false);
+        this.setHasToPay(true);
+        this.setReservation(true);
     }
     
     public Color getColor(){
