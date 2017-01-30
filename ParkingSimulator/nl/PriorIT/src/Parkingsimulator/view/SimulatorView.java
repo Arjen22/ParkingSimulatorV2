@@ -36,8 +36,8 @@ public class SimulatorView extends JFrame {
         
         carParkView = new CarParkView();
 
-        Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.CENTER);
+        Container Controlpanelview = getContentPane();
+        Controlpanelview.add(carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
 
