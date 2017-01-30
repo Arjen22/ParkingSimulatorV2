@@ -11,12 +11,14 @@ import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
+import nl.PriorIT.src.Parkingsimulator.maths.ReservationCar;
 import nl.PriorIT.src.Parkingsimulator.view.SimulatorView;
 
 public class Simulator {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String RESS = "3";
 	
 	
 	private CarQueue entranceCarQueue; // entrance object var for counting cars that want to enter
@@ -33,8 +35,10 @@ public class Simulator {
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 40; // average number of arriving cars per hour
+    int weekDayPassArrivals= 40; // average number of arriving cars with passes per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
+    int weekDayRessArrivals = 10; // average number of arriving cars with reservation per hour
+    int weekendRessArrivals = 2; // average numger of arriving cars with reservation per hour
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -45,7 +49,7 @@ public class Simulator {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30, 100);
+        simulatorView = new SimulatorView(3, 6, 30, 100, 10);
     }
 
     public void run() {
@@ -106,7 +110,9 @@ public class Simulator {
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, PASS);    	
+        addArrivingCars(numberOfCars, PASS);
+        numberOfCars=getNumberOfCars(weekDayRessArrivals, weekendRessArrivals);
+        addArrivingCars(numberOfCars, RESS);
     }
 
     private void carsEntering(CarQueue queue){
@@ -116,7 +122,7 @@ public class Simulator {
     			simulatorView.getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = simulatorView.getFirstFreeLocation(car.getHasToPay());
+            Location freeLocation = simulatorView.getFirstFreeLocation(car.getHasToPay(),car.getReservation());
             simulatorView.setCarAt(freeLocation, car);
             i++;
         }
@@ -184,6 +190,11 @@ public class Simulator {
             	entrancePassQueue.addCar(new ParkingPassCar());
             }
             break;	            
+	    case RESS:
+	        for (int i = 0; i < numberOfCars; i++) {
+	        	entrancePassQueue.addCar(new ReservationCar());
+	        }
+	        break;
     	}
     }
     

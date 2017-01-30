@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
+import java.util.ArrayList;
 
 import java.awt.*;
 
@@ -17,21 +18,31 @@ public class SimulatorView extends JFrame {
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
-//    private static int floornumber = 0;
+    private static int floornumber = 0;
     private Car[][][] cars;
+    private ArrayList<Integer> Reservations;
     private int abonnementsPlaatsen;
+    private int reserveringsPlaatsen;
     private Location laatsteplek;
+    private Location reservedLocation;
+    private Location LaatsteReserveringPlaats;
     private int hoeveelheid;
+    private int hoeveelheidReserveringen;
+    private int startPlekReserveringen;
     
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces
+    		, int abonnementsPlaatsen, int reserveringsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.abonnementsPlaatsen = abonnementsPlaatsen;
+        this.reserveringsPlaatsen = reserveringsPlaatsen;
         abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         hoeveelheid = abonnementsPlaatsen;
+        hoeveelheidReserveringen = reserveringsPlaatsen;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        ArrayList<Integer> Reservations = new ArrayList<Integer>(); 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         carParkView = new CarParkView();
@@ -66,6 +77,9 @@ public class SimulatorView extends JFrame {
     
     public int getAbonnementsPlaatsen() {
     	return abonnementsPlaatsen;
+    }
+    public int getReserveringsPlaatsen() {
+    	return reserveringsPlaatsen;
     }
     
     public Car getCarAt(Location location) {
@@ -103,18 +117,29 @@ public class SimulatorView extends JFrame {
         return car;
     }
 
-    public Location getFirstFreeLocation(boolean paying) {
+    public Location getFirstFreeLocation(boolean paying,boolean reservation) {
     	
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
-                	if (paying == true) {
+                	if (paying == true&& reservation == false) {
                 		if(floor <= laatsteplek.getFloor()) {
                 			floor = laatsteplek.getFloor();
                 			if(row <= laatsteplek.getRow()) {
                 				row = laatsteplek.getRow();
                 				if(place<= laatsteplek.getPlace()) {
                 					place = laatsteplek.getPlace() + 1;
+                				}                				            				
+                			}                				
+                		}
+                	}
+                	else if(reservation == false && paying == false) {
+                		if(floor <= LaatsteReserveringPlaats.getFloor()) {
+                			floor = LaatsteReserveringPlaats.getFloor();
+                			if(row <= LaatsteReserveringPlaats.getRow()) {
+                				row = LaatsteReserveringPlaats.getRow();
+                				if(place<= LaatsteReserveringPlaats.getPlace()) {
+                					place = LaatsteReserveringPlaats.getPlace() + 1;
                 				}                				            				
                 			}                				
                 		}
@@ -170,7 +195,15 @@ public class SimulatorView extends JFrame {
         return true;
     }
     
-    private class CarParkView extends JPanel {
+    public ArrayList<Integer> getReservations() {
+		return Reservations;
+	}
+
+	public void setReservations(ArrayList<Integer> reservations) {
+		Reservations = reservations;
+	}
+
+	private class CarParkView extends JPanel {
         
         private Dimension size;
         private Image carParkImage;    
@@ -216,10 +249,12 @@ public class SimulatorView extends JFrame {
             }
             Graphics graphics = carParkImage.getGraphics();
             int openPlekken = getAbonnementsPlaatsen();
+            int openReserveringsPlaatsen = getReserveringsPlaatsen();
             for(int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
                     	Location location = new Location(floor, row, place);
+                    	Location reservedLocation = new Location(floor, row, place);
                     	Car car = getCarAt(location);
                     	Color color = Color.white;
                     	if (openPlekken > 0){
@@ -232,6 +267,15 @@ public class SimulatorView extends JFrame {
                     	}
                     	else {
                     		color = car == null ? color : car.getColor();
+                    	}
+                    	if (openReserveringsPlaatsen > 0 ){
+                    		startPlekReserveringen = abonnementsPlaatsen +1;
+                    		color = car == null ? Color.black : car.getColor();
+                    	      if (hoeveelheidReserveringen > 0){
+                    	    	  LaatsteReserveringPlaats = reservedLocation;
+                    	    	  hoeveelheidReserveringen--;
+                    	      }
+                    	      openReserveringsPlaatsen--;
                     	}
                     drawPlace(graphics, location, color);
                     }
