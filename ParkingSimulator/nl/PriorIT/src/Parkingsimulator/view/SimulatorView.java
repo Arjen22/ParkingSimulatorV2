@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
+import java.util.ArrayList;
 
 import java.awt.*;
 
@@ -17,23 +18,50 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
+<<<<<<< Upstream, based on origin/reservering
     // private static int floornumber = 0; NOT BEING USED
+=======
+    private static int floornumber = 0;
+>>>>>>> 547dee9 reserveringen Henny en Jorick
     private Car[][][] cars;
+    private ArrayList<Integer> Reservations;
     private int abonnementsPlaatsen;
+<<<<<<< Upstream, based on origin/reservering
     private Location laatsteplekAbbo;
     private int hoeveelheidPlaatsen;
     /* private int aantalReserveringen;
     private int reservering;
     private int betalen; */
+=======
+    private int reserveringsPlaatsen;
+    private Location laatsteplek;
+    private Location reservedLocation;
+    private Location LaatsteReserveringPlaats;
+    private int hoeveelheid;
+    private int hoeveelheidReserveringen;
+    private int startPlekReserveringen;
+>>>>>>> 547dee9 reserveringen Henny en Jorick
     
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces
+    		, int abonnementsPlaatsen, int reserveringsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.abonnementsPlaatsen = abonnementsPlaatsen;
+<<<<<<< Upstream, based on origin/reservering
+=======
+        this.reserveringsPlaatsen = reserveringsPlaatsen;
+        abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
+>>>>>>> 547dee9 reserveringen Henny en Jorick
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+<<<<<<< Upstream, based on origin/reservering
         hoeveelheidPlaatsen = abonnementsPlaatsen;
+=======
+        hoeveelheid = abonnementsPlaatsen;
+        hoeveelheidReserveringen = reserveringsPlaatsen;
+>>>>>>> 547dee9 reserveringen Henny en Jorick
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        ArrayList<Integer> Reservations = new ArrayList<Integer>(); 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         carParkView = new CarParkView();
@@ -68,6 +96,9 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
     
     public int getAbonnementsPlaatsen() {
     	return abonnementsPlaatsen;
+    }
+    public int getReserveringsPlaatsen() {
+    	return reserveringsPlaatsen;
     }
     
     public Car getCarAt(Location location) {
@@ -105,6 +136,7 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
         return car;
     } 
 
+<<<<<<< Upstream, based on origin/reservering
     public Car getFirstLeavingCar() {
     	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
     	   for (int row = 0; row < getNumberOfRows(); row++) {
@@ -147,10 +179,13 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
 
 
     
+=======
+>>>>>>> 547dee9 reserveringen Henny en Jorick
     public Location getFirstFreeLocation(boolean paying,boolean reservation) {
     	
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
+<<<<<<< Upstream, based on origin/reservering
                 for (int place = 0; place < getNumberOfPlaces(); place++) { 
         
                 	Location location = new Location(floor, row, place); /*HIER EEN LOCATIE AANMAKEN*/
@@ -187,6 +222,29 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
                             Location check2 = getCarAt(location) == null ? location : null;
                             if(check2 != null) {
                             	return location2;
+=======
+                for (int place = 0; place < getNumberOfPlaces(); place++) {
+                	if (paying == true&& reservation == false) {
+                		if(floor <= laatsteplek.getFloor()) {
+                			floor = laatsteplek.getFloor();
+                			if(row <= laatsteplek.getRow()) {
+                				row = laatsteplek.getRow();
+                				if(place<= laatsteplek.getPlace()) {
+                					place = laatsteplek.getPlace() + 1;
+                				}                				            				
+                			}                				
+                		}
+                	}
+                	else if(reservation == false && paying == false) {
+                		if(floor <= LaatsteReserveringPlaats.getFloor()) {
+                			floor = LaatsteReserveringPlaats.getFloor();
+                			if(row <= LaatsteReserveringPlaats.getRow()) {
+                				row = LaatsteReserveringPlaats.getRow();
+                				if(place<= LaatsteReserveringPlaats.getPlace()) {
+                					place = LaatsteReserveringPlaats.getPlace() + 1;
+                				}                				            				
+                			}                				
+>>>>>>> 547dee9 reserveringen Henny en Jorick
                 		}
                 	}
                             }
@@ -222,6 +280,17 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
     }
 
     
+<<<<<<< Upstream, based on origin/reservering
+=======
+    public ArrayList<Integer> getReservations() {
+		return Reservations;
+	}
+
+	public void setReservations(ArrayList<Integer> reservations) {
+		Reservations = reservations;
+	}
+
+>>>>>>> 547dee9 reserveringen Henny en Jorick
 	private class CarParkView extends JPanel {
         
         private Dimension size;
@@ -268,10 +337,12 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
             }
             Graphics graphics = carParkImage.getGraphics();
             int openPlekken = getAbonnementsPlaatsen();
+            int openReserveringsPlaatsen = getReserveringsPlaatsen();
             for(int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
                     	Location location = new Location(floor, row, place);
+                    	Location reservedLocation = new Location(floor, row, place);
                     	Car car = getCarAt(location);
                     	Color color = Color.white;
                     	if (openPlekken > 0){
@@ -290,9 +361,21 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
                     	if(car == null){
                     		color = color;
                     	}
+<<<<<<< Upstream, based on origin/reservering
                     	else {
                     		color = car.getColor();
                     		}
+=======
+                    	if (openReserveringsPlaatsen > 0 ){
+                    		startPlekReserveringen = abonnementsPlaatsen +1;
+                    		color = car == null ? Color.black : car.getColor();
+                    	      if (hoeveelheidReserveringen > 0){
+                    	    	  LaatsteReserveringPlaats = reservedLocation;
+                    	    	  hoeveelheidReserveringen--;
+                    	      }
+                    	      openReserveringsPlaatsen--;
+                    	}
+>>>>>>> 547dee9 reserveringen Henny en Jorick
                     drawPlace(graphics, location, color);
                     }
                 }

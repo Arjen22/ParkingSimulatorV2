@@ -49,7 +49,7 @@ public class Simulator {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30, 100);
+        simulatorView = new SimulatorView(3, 6, 30, 100, 10);
     }
 
     public void run() {
