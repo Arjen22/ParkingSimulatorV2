@@ -223,7 +223,7 @@ public class SimulatorView extends JFrame {
                     	Car car = getCarAt(location);
                     	Color color = Color.white;
                     	if (openPlekken > 0){
-                    		color = car == null ? Color.yellow : car.getColor();
+                    		color = car == null ? Color.green : car.getColor();
                     	      if (hoeveelheid > 0){
                     	    	  laatsteplek = location;
                     	    	  hoeveelheid--;

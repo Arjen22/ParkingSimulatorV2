@@ -8,6 +8,7 @@ public abstract class Car {
     private int minutesLeft;
     private boolean isPaying;
     private boolean hasToPay;
+    private boolean hasReservation;
 
     /**
      * Constructor for objects of class Car
@@ -54,5 +55,12 @@ public abstract class Car {
         minutesLeft--;
     }
     
+    public void setReservation(boolean hasReservation) {
+    	this.hasReservation = hasReservation;
+    }
+    
+    public boolean getReservation() {
+    	return hasReservation;
+    }
     public abstract Color getColor();
 }
