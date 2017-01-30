@@ -38,8 +38,8 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
         
         carParkView = new CarParkView();
 
-        Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.CENTER);
+        Container Controlpanelview = getContentPane();
+        Controlpanelview.add(carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
 
