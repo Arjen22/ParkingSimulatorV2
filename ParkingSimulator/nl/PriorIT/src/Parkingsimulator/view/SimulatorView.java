@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
-import java.util.ArrayList;
 
 import java.awt.*;
 
@@ -21,17 +20,17 @@ public class SimulatorView extends JFrame {
     private static int floornumber = 0;
     private Car[][][] cars;
     private int abonnementsPlaatsen;
-    private Location laatsteplek;
-    private int hoeveelheid;
+    private Location laatsteplekAbbo;
+    private int hoeveelheidPlaatsen;
+    private int aantalReserveringen;
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.abonnementsPlaatsen = abonnementsPlaatsen;
-        abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
-        hoeveelheid = abonnementsPlaatsen;
+        hoeveelheidPlaatsen = abonnementsPlaatsen;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -110,14 +109,13 @@ public class SimulatorView extends JFrame {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                 	if (paying == true&& reservation == false) {
-                		if(floor <= laatsteplek.getFloor()) {
-                			floor = laatsteplek.getFloor();
-                			if(row <= laatsteplek.getRow()) {
-                				row = laatsteplek.getRow();
-                				if(place<= laatsteplek.getPlace()) {
-                					place = laatsteplek.getPlace() + 1;
-                				}                				            				
-                			}                				
+                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                			floor = laatsteplekAbbo.getFloor();
+                			row = laatsteplekAbbo.getRow();
+                			place = laatsteplekAbbo.getPlace() + 1;
+                			if(paying == true && reservation == true) {
+                						place = laatsteplekAbbo.getPlace() + aantalReserveringen + 1;
+                			}        				
                 		}
                 	}                	
                     Location location = new Location(floor, row, place);
@@ -223,16 +221,24 @@ public class SimulatorView extends JFrame {
                     	Car car = getCarAt(location);
                     	Color color = Color.white;
                     	if (openPlekken > 0){
-                    		color = car == null ? Color.green : car.getColor();
-                    	      if (hoeveelheid > 0){
-                    	    	  laatsteplek = location;
-                    	    	  hoeveelheid--;
+                    		if(car == null) {
+                    			color = Color.green;
+                    		}
+                    		else {
+                    			color = car.getColor();
+                    		}
+                    	      if (hoeveelheidPlaatsen > 0){
+                    	    	  laatsteplekAbbo = location;
+                    	    	  hoeveelheidPlaatsen--;
                     	      }
                     	      openPlekken--;
                     	}
-                    	else {
-                    		color = car == null ? color : car.getColor();
+                    	if(car == null){
+                    		color = color;
                     	}
+                    	else {
+                    		color = car.getColor();
+                    		}
                     drawPlace(graphics, location, color);
                     }
                 }
