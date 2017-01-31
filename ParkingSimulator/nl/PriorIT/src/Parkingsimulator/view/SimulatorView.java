@@ -20,29 +20,19 @@ public class SimulatorView extends JFrame {
     private int numberOfOpenSpots;
     private static int floornumber = 0;
     private Car[][][] cars;
-    private ArrayList<Integer> Reservations;
     private int abonnementsPlaatsen;
-    private int reserveringsPlaatsen;
     private Location laatsteplek;
-    private Location reservedLocation;
-    private Location LaatsteReserveringPlaats;
     private int hoeveelheid;
-    private int hoeveelheidReserveringen;
-    private int startPlekReserveringen;
     
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces
-    		, int abonnementsPlaatsen, int reserveringsPlaatsen) {
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         this.abonnementsPlaatsen = abonnementsPlaatsen;
-        this.reserveringsPlaatsen = reserveringsPlaatsen;
         abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         hoeveelheid = abonnementsPlaatsen;
-        hoeveelheidReserveringen = reserveringsPlaatsen;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        ArrayList<Integer> Reservations = new ArrayList<Integer>(); 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         carParkView = new CarParkView();
@@ -77,9 +67,6 @@ public class SimulatorView extends JFrame {
     
     public int getAbonnementsPlaatsen() {
     	return abonnementsPlaatsen;
-    }
-    public int getReserveringsPlaatsen() {
-    	return reserveringsPlaatsen;
     }
     
     public Car getCarAt(Location location) {
@@ -132,19 +119,7 @@ public class SimulatorView extends JFrame {
                 				}                				            				
                 			}                				
                 		}
-                	}
-                	else if(reservation == false && paying == false) {
-                		if(floor <= LaatsteReserveringPlaats.getFloor()) {
-                			floor = LaatsteReserveringPlaats.getFloor();
-                			if(row <= LaatsteReserveringPlaats.getRow()) {
-                				row = LaatsteReserveringPlaats.getRow();
-                				if(place<= LaatsteReserveringPlaats.getPlace()) {
-                					place = LaatsteReserveringPlaats.getPlace() + 1;
-                				}                				            				
-                			}                				
-                		}
-                	}
-                	
+                	}                	
                     Location location = new Location(floor, row, place);
                     Location check = getCarAt(location) == null ? location : null;
                     if(check != null) {
@@ -194,14 +169,6 @@ public class SimulatorView extends JFrame {
         }
         return true;
     }
-    
-    public ArrayList<Integer> getReservations() {
-		return Reservations;
-	}
-
-	public void setReservations(ArrayList<Integer> reservations) {
-		Reservations = reservations;
-	}
 
 	private class CarParkView extends JPanel {
         
@@ -249,12 +216,10 @@ public class SimulatorView extends JFrame {
             }
             Graphics graphics = carParkImage.getGraphics();
             int openPlekken = getAbonnementsPlaatsen();
-            int openReserveringsPlaatsen = getReserveringsPlaatsen();
             for(int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
                     	Location location = new Location(floor, row, place);
-                    	Location reservedLocation = new Location(floor, row, place);
                     	Car car = getCarAt(location);
                     	Color color = Color.white;
                     	if (openPlekken > 0){
@@ -267,15 +232,6 @@ public class SimulatorView extends JFrame {
                     	}
                     	else {
                     		color = car == null ? color : car.getColor();
-                    	}
-                    	if (openReserveringsPlaatsen > 0 ){
-                    		startPlekReserveringen = abonnementsPlaatsen +1;
-                    		color = car == null ? Color.black : car.getColor();
-                    	      if (hoeveelheidReserveringen > 0){
-                    	    	  LaatsteReserveringPlaats = reservedLocation;
-                    	    	  hoeveelheidReserveringen--;
-                    	      }
-                    	      openReserveringsPlaatsen--;
                     	}
                     drawPlace(graphics, location, color);
                     }
