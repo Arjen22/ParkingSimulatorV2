@@ -1,7 +1,7 @@
 /**
  * 
  */
-package nl.PriorIT.src.Parkingsimulator.logic;
+package nl.PriorIT.src.Parkingsimulator.core;
 
 import nl.PriorIT.src.Parkingsimulator.logic.Model;
 
@@ -10,9 +10,10 @@ public class Run {
     /**
      * @param args
      */
+    
     public static void main(String[] args) {
-	 
-	new Model();
+	Model model = new Model();
+	model.start();
 	
 }
 

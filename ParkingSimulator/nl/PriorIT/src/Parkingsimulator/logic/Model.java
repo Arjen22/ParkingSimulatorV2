@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import nl.PriorIT.src.Parkingsimulator.controller.Controller;
 import nl.PriorIT.src.Parkingsimulator.logic.GeneralModel;
@@ -14,6 +15,7 @@ import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
 import nl.PriorIT.src.Parkingsimulator.view.CarparkView;
+import nl.PriorIT.src.Parkingsimulator.view.*;
 
 public class Model extends GeneralModel implements Runnable {
 	private int aantal;
@@ -37,7 +39,11 @@ public class Model extends GeneralModel implements Runnable {
 	private static int abonnementsPlaatsen = 40;
 	private static int numberOfOpenSpots;
 	private int hoeveelheid;
-	private Car cars[][][];
+	private Car[][][] cars;
+	private CarparkView cpview;
+	private Controller simcontroller;
+	private JFrame guiframe;
+	private JPanel screen;
 	
 	static int weekDayArrivals= 100; // average number of arriving cars per hour
 	static int weekendArrivals = 200; // average number of arriving cars per hour
@@ -47,29 +53,31 @@ public class Model extends GeneralModel implements Runnable {
 	static int enterSpeed = 3; // number of cars that can enter per minute
 	static int paymentSpeed = 7; // number of cars that can pay per minute
 	static int exitSpeed = 5; // number of cars that can leave per minute
-	
-	
+
 	
 	public Model() {
-	        CarparkView carParkView = new CarparkView(SimulatorModel);
+	        cpview = new CarparkView(SimulatorModel);
+	        simcontroller = new Controller(SimulatorModel);
 	    	entranceCarQueue = new CarQueue();
 	        entrancePassQueue = new CarQueue();
 	        paymentCarQueue = new CarQueue();
 	        exitCarQueue = new CarQueue();
 	      
-	        
 	        abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
 	        numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
 	        hoeveelheid = abonnementsPlaatsen;
 	        cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	        
 
+		guiframe=new JFrame("Parkeergarage Simulator");
+		screen.setSize(800, 500);
+		screen.setLayout(null);
+	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        Container Controlpanelview = getContentPane();
-	        Controlpanelview.add(carParkView, BorderLayout.CENTER);
+	        Controlpanelview.add(cpview, BorderLayout.CENTER);
+	        Controlpanelview.add(simcontroller, BorderLayout.EAST);
 	        pack();
-	        setVisible(true);
+	        screen.setVisible(true);
 
 	        updateViews();
 	}
@@ -144,6 +152,7 @@ public class Model extends GeneralModel implements Runnable {
 	    	carsArriving();
 	    	carsEntering(entrancePassQueue);
 	    	carsEntering(entranceCarQueue);  	
+	    	
 	    }
 	    
 	    private void handleExit(){
@@ -152,10 +161,12 @@ public class Model extends GeneralModel implements Runnable {
 	        carsLeaving();
 	    }
 	    
+	    
+	    
 	    private void updateViews() {
-		CarparkView.tick();
+		cpview.tick();
 	        // Update the car park view.
-	        CarparkView.updateView();
+		cpview.updateView();
 	    }
 	    
 	    private void carsArriving(){
@@ -169,18 +180,18 @@ public class Model extends GeneralModel implements Runnable {
 	        int i=0;
 	        // Remove car from the front of the queue and assign to a parking space.
 	    	while (queue.carsInQueue()>0 && 
-	    			carParkView.getNumberOfOpenSpots()>0 && 
+	    		cpview.getNumberOfOpenSpots()> 0 && 
 	    			i<enterSpeed) {
 	            Car car = queue.removeCar();
-	            Location freeLocation = carParkView.getFirstFreeLocation(car.getHasToPay());
-	            carParkView.setCarAt(freeLocation, car);
+	            Location freeLocation = cpview.getFirstFreeLocation(car.getHasToPay());
+	            cpview.setCarAt(freeLocation, car);
 	            i++;
 	        }
 	    }
 	    
 	    private void carsReadyToLeave(){
 	        // Add leaving cars to the payment queue.
-	        Car car = carParkView.getFirstLeavingCar();
+	        Car car = cpview.getFirstLeavingCar();
 	        while (car!=null) {
 	        	if (car.getHasToPay()){
 		            car.setIsPaying(true);
@@ -189,7 +200,7 @@ public class Model extends GeneralModel implements Runnable {
 	        	else {
 	        		carLeavesSpot(car);
 	        	}
-	            car = carParkView.getFirstLeavingCar();
+	            car = cpview.getFirstLeavingCar();
 	        }
 	    }
 
@@ -245,7 +256,7 @@ public class Model extends GeneralModel implements Runnable {
 	    
 	    private void carLeavesSpot(Car car){
 		
-		carParkView.removeCarAt(car.getLocation());
+		cpview.removeCarAt(car.getLocation());
 	        exitCarQueue.addCar(car);
 	    }
 
