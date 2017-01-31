@@ -6,12 +6,11 @@ package nl.PriorIT.src.Parkingsimulator.view;
 
 import javax.swing.JPanel;
 
-import nl.PriorIT.src.Parkingsimulator.logic.Model;
+import nl.PriorIT.src.Parkingsimulator.logic.*;
 
 public abstract class GeneralView extends JPanel {
     private static final long serialVersionUID = 108803;
     protected Model SimulatorModel;
-
     
     public GeneralView(Model SimulatorModel) {
 	this.SimulatorModel=SimulatorModel;
