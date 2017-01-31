@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
-import java.util.ArrayList;
 
 import java.awt.*;
 
@@ -25,6 +24,7 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
 >>>>>>> 547dee9 reserveringen Henny en Jorick
     private Car[][][] cars;
     private int abonnementsPlaatsen;
+<<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
     private Location laatsteplekAbbo;
@@ -44,6 +44,11 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
 >>>>>>> 547dee9 reserveringen Henny en Jorick
 =======
 >>>>>>> db31533 reservering verwijderd zodat we opnieuw kunnen beginnen daarmee
+=======
+    private Location laatsteplekAbbo;
+    private int hoeveelheidPlaatsen;
+    private int aantalReserveringen;
+>>>>>>> e264262 Hallo jorick
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
@@ -52,13 +57,17 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
         this.abonnementsPlaatsen = abonnementsPlaatsen;
 <<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
+<<<<<<< Upstream, based on origin/reservering
 =======
         this.reserveringsPlaatsen = reserveringsPlaatsen;
 =======
 >>>>>>> db31533 reservering verwijderd zodat we opnieuw kunnen beginnen daarmee
         abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
 >>>>>>> 547dee9 reserveringen Henny en Jorick
+=======
+>>>>>>> e264262 Hallo jorick
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+<<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
         hoeveelheidPlaatsen = abonnementsPlaatsen;
 =======
@@ -68,6 +77,9 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
 >>>>>>> 547dee9 reserveringen Henny en Jorick
 =======
 >>>>>>> db31533 reservering verwijderd zodat we opnieuw kunnen beginnen daarmee
+=======
+        hoeveelheidPlaatsen = abonnementsPlaatsen;
+>>>>>>> e264262 Hallo jorick
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -229,14 +241,13 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
 =======
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                 	if (paying == true&& reservation == false) {
-                		if(floor <= laatsteplek.getFloor()) {
-                			floor = laatsteplek.getFloor();
-                			if(row <= laatsteplek.getRow()) {
-                				row = laatsteplek.getRow();
-                				if(place<= laatsteplek.getPlace()) {
-                					place = laatsteplek.getPlace() + 1;
-                				}                				            				
-                			}                				
+                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                			floor = laatsteplekAbbo.getFloor();
+                			row = laatsteplekAbbo.getRow();
+                			place = laatsteplekAbbo.getPlace() + 1;
+                			if(paying == true && reservation == true) {
+                						place = laatsteplekAbbo.getPlace() + aantalReserveringen + 1;
+                			}        				
                 		}
 <<<<<<< Upstream, based on origin/reservering
                 	}
@@ -395,6 +406,7 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
                     	      openPlekken--;
                     	}
 <<<<<<< Upstream, based on origin/reservering
+<<<<<<< Upstream, based on origin/reservering
                     	if(car == null){
                     		color = color;
                     	}
@@ -415,8 +427,18 @@ public class SimulatorView extends JFrame { //the serializable class SimulatorVi
                     	else {
                     		color = car == null ? color : car.getColor();
 >>>>>>> db31533 reservering verwijderd zodat we opnieuw kunnen beginnen daarmee
+=======
+                    	if(car == null){
+                    		color = color;
+>>>>>>> e264262 Hallo jorick
                     	}
+<<<<<<< Upstream, based on origin/reservering
 >>>>>>> 547dee9 reserveringen Henny en Jorick
+=======
+                    	else {
+                    		color = car.getColor();
+                    		}
+>>>>>>> e264262 Hallo jorick
                     drawPlace(graphics, location, color);
                     }
                 }
