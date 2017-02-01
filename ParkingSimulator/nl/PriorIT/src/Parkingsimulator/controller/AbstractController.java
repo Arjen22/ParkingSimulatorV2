@@ -6,6 +6,7 @@ package nl.PriorIT.src.Parkingsimulator.controller;
 import javax.swing.JPanel;
 
 import nl.PriorIT.src.Parkingsimulator.logic.Model;
+import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 
 
@@ -16,9 +17,9 @@ import nl.PriorIT.src.Parkingsimulator.logic.Model;
 public abstract class AbstractController extends JPanel {
     
     private static final long serialVersionUID = 10801;
-    protected Model simulatormodel;
+    protected TestModel SimulatorModel;
 	
-	public AbstractController(Model simulatormodel) {
-		this.simulatormodel=simulatormodel;
+	public AbstractController(TestModel SimulatorModel) {
+		this.SimulatorModel=SimulatorModel;
 	}
 }

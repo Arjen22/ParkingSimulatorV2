@@ -28,6 +28,10 @@ public class Model extends GeneralModel implements Runnable {
 	private CarQueue paymentCarQueue; // entrance object var for cars that need to pay
 	private CarQueue exitCarQueue; // exit object var for cars that want to exit the garage
 	private Model SimulatorModel; // simulatormodel object var for the simulator model
+	private JFrame guiframe;
+	private JPanel screen;
+	private CarparkView cpview;
+	private Controller simcontroller;
 	
 	private static int day = 0;
 	private static int hour = 0;
@@ -40,10 +44,8 @@ public class Model extends GeneralModel implements Runnable {
 	private static int numberOfOpenSpots;
 	private int hoeveelheid;
 	private Car[][][] cars;
-	private CarparkView cpview;
-	private Controller simcontroller;
-	private JFrame guiframe;
-	private JPanel screen;
+	
+
 	
 	static int weekDayArrivals= 100; // average number of arriving cars per hour
 	static int weekendArrivals = 200; // average number of arriving cars per hour
@@ -56,30 +58,28 @@ public class Model extends GeneralModel implements Runnable {
 
 	
 	public Model() {
-	        cpview = new CarparkView(SimulatorModel);
-	        simcontroller = new Controller(SimulatorModel);
 	    	entranceCarQueue = new CarQueue();
 	        entrancePassQueue = new CarQueue();
 	        paymentCarQueue = new CarQueue();
 	        exitCarQueue = new CarQueue();
-	      
 	        abonnementsPlaatsen = abonnementsPlaatsen < 0 ? 0 : abonnementsPlaatsen;
 	        numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
 	        hoeveelheid = abonnementsPlaatsen;
 	        cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 	        
-
+	        /*
 		guiframe=new JFrame("Parkeergarage Simulator");
 		screen.setSize(800, 500);
 		screen.setLayout(null);
-	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        Container Controlpanelview = getContentPane();
 	        Controlpanelview.add(cpview, BorderLayout.CENTER);
 	        Controlpanelview.add(simcontroller, BorderLayout.EAST);
 	        pack();
 	        screen.setVisible(true);
-
-	        updateViews();
+		
+	        updateViews(); */
 	}
 	
 	public int getAantal() {
