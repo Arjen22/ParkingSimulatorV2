@@ -5,6 +5,7 @@
 package nl.PriorIT.src.Parkingsimulator.view;
 
 import nl.PriorIT.src.Parkingsimulator.logic.Model;
+import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 /**
  * 
@@ -12,7 +13,7 @@ import nl.PriorIT.src.Parkingsimulator.logic.Model;
  */
 public class ManagementView extends GeneralView {
 
-    public ManagementView(Model simulatormodel) {
+    public ManagementView(TestModel simulatormodel) {
 	super(simulatormodel);
 	
     }
