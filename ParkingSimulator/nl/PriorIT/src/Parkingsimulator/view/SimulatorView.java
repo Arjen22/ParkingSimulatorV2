@@ -12,12 +12,16 @@ import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import java.awt.*;
 
 <<<<<<< Upstream, based on origin/reservering
+<<<<<<< Upstream, based on origin/reservering
 public class SimulatorView extends JFrame { //the serializable class SimulatorView does not declare a static final serialVersionUID field of type long
 =======
 public class SimulatorView extends JFrame { 
 											//the serializable class SimulatorView does not declare a static
 											//final serialVersionUID field of type long
 >>>>>>> 07d548c Poging tot abbonementshouders
+=======
+public class SimulatorView extends JFrame { //the serializable class SimulatorView does not declare a static final serialVersionUID field of type long
+>>>>>>> 3ed0e6b bijna klaar
     private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
@@ -228,7 +232,7 @@ public class SimulatorView extends JFrame {
     	   }
     	}
     	return null;
-    	}
+    	} 
 
     	public void tick() {
     	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
@@ -242,7 +246,8 @@ public class SimulatorView extends JFrame {
     	       }
     	   }
     	}
-    	}
+    	} 
+    	
 
     	private boolean locationIsValid(Location location) {
     	int floor = location.getFloor();
@@ -252,7 +257,8 @@ public class SimulatorView extends JFrame {
     	   return false;
     	}
     	return true;
-    	}
+    	} 
+
 
     
 >>>>>>> 07d548c Poging tot abbonementshouders
@@ -260,6 +266,7 @@ public class SimulatorView extends JFrame {
     	
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
+<<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
                 for (int place = 0; place < getNumberOfPlaces(); place++) { 
         
@@ -299,24 +306,41 @@ public class SimulatorView extends JFrame {
                             	return location2;
 =======
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
+=======
+                for (int place = 0; place < getNumberOfPlaces(); place++) { 
+>>>>>>> 3ed0e6b bijna klaar
         
                 	Location location = new Location(floor, row, place); /*HIER EEN LOCATIE AANMAKEN*/
                 	 if (paying == false && reservation == false) { //ParkingPassCar
-                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                		 for (int floor1 = 0; floor < getNumberOfFloors(); floor++) {
+                	            for (int row1 = 0; row < getNumberOfRows(); row++) {
+                	                for (int place1 = 0; place < getNumberOfPlaces(); place++) {
+                		 if(floor1 <= laatsteplekAbbo.getFloor() && row1 <= laatsteplekAbbo.getRow() && place1<= laatsteplekAbbo.getPlace()) {
                 			floor = laatsteplekAbbo.getFloor();
                 			row = laatsteplekAbbo.getRow();
-                			place = laatsteplekAbbo.getPlace() + 1;       				
-                		}
+                			place = laatsteplekAbbo.getPlace() + 1;
+                			Location location1 = new Location(floor, row, place);
+                            Location check1 = getCarAt(location) == null ? location : null;
+                            if(check1 != null) {
+                            	return location1;
+                		 }
+                	   }
+                	  }
+                    }
                 		//Location location = new Location(floor, row, place);
                         Location check1 = getCarAt(location) == null ? location : null;
                         if(check1 != null) {
                         	return location;
                         } 
-                	} else if (paying == true && reservation == true) { //ReservationCar
-                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                	 else if (paying == true && reservation == true) { //ReservationCar
+                		for (int floor2 = 0; floor < getNumberOfFloors(); floor++) {
+                            for (int row2 = 0; row < getNumberOfRows(); row++) {
+                                for (int place2 = 0; place < getNumberOfPlaces(); place++) {
+                		if(floor2 <= laatsteplekAbbo.getFloor() && row2 <= laatsteplekAbbo.getRow() && place2 <= laatsteplekAbbo.getPlace()) {
                 			floor = laatsteplekAbbo.getFloor();
-                			row = laatsteplekAbbo.getRow();
+                			row = laatsteplekAbbo.getRow() + 3;
                 			place = laatsteplekAbbo.getPlace() + 1;
+<<<<<<< Upstream, based on origin/reservering
                 		}
 <<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
@@ -369,22 +393,37 @@ public class SimulatorView extends JFrame {
 >>>>>>> db31533 reservering verwijderd zodat we opnieuw kunnen beginnen daarmee
 =======
                 	}
+=======
+                			Location location2 = new Location(floor, row, place);
+>>>>>>> 3ed0e6b bijna klaar
                             Location check2 = getCarAt(location) == null ? location : null;
                             if(check2 != null) {
-                            	return location;    
+                            	return location2;
+                		}
+                	}
+                            }
+                		}
+                		} 
                     } else { //NORMAL CAR
-                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                    	for (int floor3 = 0; floor < getNumberOfFloors(); floor++) {
+                            for (int row3 = 0; row < getNumberOfRows(); row++) {
+                                for (int place3 = 0; place < getNumberOfPlaces(); place++) {
+                    	if(floor3 <= laatsteplekAbbo.getFloor() && row3 <= laatsteplekAbbo.getRow() && place3 <= laatsteplekAbbo.getPlace()) {
                 			floor = laatsteplekAbbo.getFloor();
                 			row = laatsteplekAbbo.getRow();
                 			place = laatsteplekAbbo.getPlace() + 1;
+                			Location location3 = new Location(floor, row, place);
+                            Location check3 = getCarAt(location) == null ? location : null;
+                            if(check3 != null) {
+                            	return location3;
                 		}
                 	}
-                		
-                             Location check = getCarAt(location) == null ? location : null;
-                            if(check != null) {
-                            	return location;
+                            }
+                    	}
+                            
                 		}
-                	}       	
+                	}       
+                	}
                     //Location location = new Location(floor, row, place);
                     //Location check = getCarAt(location) == null ? location : null;
                     //if(check != null) {
@@ -392,6 +431,7 @@ public class SimulatorView extends JFrame {
 >>>>>>> 07d548c Poging tot abbonementshouders
                     }
                 }
+<<<<<<< Upstream, based on origin/reservering
 <<<<<<< Upstream, based on origin/reservering
         return null;
     }
@@ -437,8 +477,11 @@ public class SimulatorView extends JFrame {
 =======
             //}
         //}
+=======
+>>>>>>> 3ed0e6b bijna klaar
         return null;
     }
+
     
 >>>>>>> 07d548c Poging tot abbonementshouders
 	private class CarParkView extends JPanel {
@@ -562,10 +605,15 @@ public class SimulatorView extends JFrame {
 
 }
 <<<<<<< Upstream, based on origin/reservering
+<<<<<<< Upstream, based on origin/reservering
     }
 }
 =======
 >>>>>>> 07d548c Poging tot abbonementshouders
+=======
+    }
+}
+>>>>>>> 3ed0e6b bijna klaar
 
 /*
   nog niet af! met switch statement maar met if is beter^)      public Location getEersteVrijeLocatie(boolean paying, boolean reservation) {
