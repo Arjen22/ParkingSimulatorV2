@@ -11,18 +11,22 @@ import nl.PriorIT.src.Parkingsimulator.maths.Location;
 
 import java.awt.*;
 
-public class SimulatorView extends JFrame {
+public class SimulatorView extends JFrame { 
+											//the serializable class SimulatorView does not declare a static
+											//final serialVersionUID field of type long
     private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
-    private static int floornumber = 0;
+    // private static int floornumber = 0; NOT BEING USED
     private Car[][][] cars;
     private int abonnementsPlaatsen;
     private Location laatsteplekAbbo;
     private int hoeveelheidPlaatsen;
-    private int aantalReserveringen;
+    /* private int aantalReserveringen;
+    private int reservering;
+    private int betalen; */
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, int abonnementsPlaatsen) {
         this.numberOfFloors = numberOfFloors;
@@ -103,71 +107,98 @@ public class SimulatorView extends JFrame {
         return car;
     }
 
+    public Car getFirstLeavingCar() {
+    	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+    	   for (int row = 0; row < getNumberOfRows(); row++) {
+    	       for (int place = 0; place < getNumberOfPlaces(); place++) {
+    	           Location location = new Location(floor, row, place);
+    	           Car car = getCarAt(location);
+    	           if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying()) {
+    	               return car;
+    	           }
+    	       }
+    	   }
+    	}
+    	return null;
+    	}
+
+    	public void tick() {
+    	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+    	   for (int row = 0; row < getNumberOfRows(); row++) {
+    	       for (int place = 0; place < getNumberOfPlaces(); place++) {
+    	           Location location = new Location(floor, row, place);
+    	           Car car = getCarAt(location);
+    	           if (car != null) {
+    	               car.tick();
+    	           }
+    	       }
+    	   }
+    	}
+    	}
+
+    	private boolean locationIsValid(Location location) {
+    	int floor = location.getFloor();
+    	int row = location.getRow();
+    	int place = location.getPlace();
+    	if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces) {
+    	   return false;
+    	}
+    	return true;
+    	}
+
+    
     public Location getFirstFreeLocation(boolean paying,boolean reservation) {
     	
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
-                	if (paying == true&& reservation == false) {
+        
+                	Location location = new Location(floor, row, place); /*HIER EEN LOCATIE AANMAKEN*/
+                	 if (paying == false && reservation == false) { //ParkingPassCar
+                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                			floor = laatsteplekAbbo.getFloor();
+                			row = laatsteplekAbbo.getRow();
+                			place = laatsteplekAbbo.getPlace() + 1;       				
+                		}
+                		//Location location = new Location(floor, row, place);
+                        Location check1 = getCarAt(location) == null ? location : null;
+                        if(check1 != null) {
+                        	return location;
+                        } 
+                	} else if (paying == true && reservation == true) { //ReservationCar
                 		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
                 			floor = laatsteplekAbbo.getFloor();
                 			row = laatsteplekAbbo.getRow();
                 			place = laatsteplekAbbo.getPlace() + 1;
-                			if(paying == true && reservation == true) {
-                						place = laatsteplekAbbo.getPlace() + aantalReserveringen + 1;
-                			}        				
                 		}
-                	}                	
-                    Location location = new Location(floor, row, place);
-                    Location check = getCarAt(location) == null ? location : null;
-                    if(check != null) {
-                    	return location;
+                	}
+                            Location check2 = getCarAt(location) == null ? location : null;
+                            if(check2 != null) {
+                            	return location;    
+                    } else { //NORMAL CAR
+                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+                			floor = laatsteplekAbbo.getFloor();
+                			row = laatsteplekAbbo.getRow();
+                			place = laatsteplekAbbo.getPlace() + 1;
+                		}
+                	}
+                		
+                             Location check = getCarAt(location) == null ? location : null;
+                            if(check != null) {
+                            	return location;
+                		}
+                	}       	
+                    //Location location = new Location(floor, row, place);
+                    //Location check = getCarAt(location) == null ? location : null;
+                    //if(check != null) {
+                    //	return location;
                     }
                 }
-            }
-        }
+            //}
+        //}
         return null;
     }
     
-    public Car getFirstLeavingCar() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    Car car = getCarAt(location);
-                    if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying()) {
-                        return car;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public void tick() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    Car car = getCarAt(location);
-                    if (car != null) {
-                        car.tick();
-                    }
-                }
-            }
-        }
-    }
-
-    private boolean locationIsValid(Location location) {
-        int floor = location.getFloor();
-        int row = location.getRow();
-        int place = location.getPlace();
-        if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces) {
-            return false;
-        }
-        return true;
-    }
-
 	private class CarParkView extends JPanel {
         
         private Dimension size;
@@ -260,3 +291,87 @@ public class SimulatorView extends JFrame {
     }
 
 }
+
+/*
+  nog niet af! met switch statement maar met if is beter^)      public Location getEersteVrijeLocatie(boolean paying, boolean reservation) {
+betalen = (paying)? 1 : 0;
+reservering= (reservation)? 3 : 2;
+
+ switch(betalen) {
+ case 1: //wel betalen
+	  switch(reservering) { //wel betalen, wel reservering
+	  case 1: //reservingCar
+		  for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+	            for (int row = 0; row < getNumberOfRows(); row++) {
+	                for (int place = 0; place < getNumberOfPlaces(); place++) {
+	                	if (paying == true && reservation == false) {
+	                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+	                			floor = laatsteplekAbbo.getFloor();
+	                			row = laatsteplekAbbo.getRow();
+	                			place = laatsteplekAbbo.getPlace() + 1;
+	                		}        				
+             		}
+             	
+	                Location location = new Location(floor, row, place);
+                 Location check = getCarAt(location) == null ? location : null;
+                 if(check != null) {
+                 	return location;
+                 }
+	          }
+	            }
+		  }
+	  break;
+	  }
+
+ break;	
+ 
+ case 0: //niet betalen
+	  switch(reservering) { //niet betalen, geen reservering
+	  case 2: //abonnementCar
+		  for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+	            for (int row = 0; row < getNumberOfRows(); row++) {
+	                for (int place = 0; place < getNumberOfPlaces(); place++) {
+	                	if (paying == true&& reservation == false) {
+	                		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+	                			floor = laatsteplekAbbo.getFloor();
+	                			row = laatsteplekAbbo.getRow();
+	                			place = laatsteplekAbbo.getPlace() + 1;
+	                		}        				
+               		}
+               	
+	                Location location = new Location(floor, row, place);
+                   Location check = getCarAt(location) == null ? location : null;
+                   if(check != null) {
+                   	return location;
+                   }
+	          }     
+	  break;
+	  }
+ break;
+		  }
+ default:
+	  for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+           for (int row = 0; row < getNumberOfRows(); row++) {
+               for (int place = 0; place < getNumberOfPlaces(); place++) {
+               	if (paying == true&& reservation == false) {
+               		if(floor <= laatsteplekAbbo.getFloor() && row <= laatsteplekAbbo.getRow() && place<= laatsteplekAbbo.getPlace()) {
+               			floor = laatsteplekAbbo.getFloor();
+               			row = laatsteplekAbbo.getRow();
+               			place = laatsteplekAbbo.getPlace() + 1;
+               		}        				
+           		}
+           	
+               Location location = new Location(floor, row, place);
+               Location check = getCarAt(location) == null ? location : null;
+               if(check != null) {
+               	return location;
+               }
+         }
+	  break;
+	  }
+ 
+ }
+}
+}
+}
+*/
