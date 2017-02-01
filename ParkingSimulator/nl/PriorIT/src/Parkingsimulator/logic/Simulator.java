@@ -25,7 +25,7 @@ public class Simulator {
     private CarQueue entrancePassQueue; // entrance object var for cars that go through the queue and enter the garage
     private CarQueue paymentCarQueue; // entrance object var for cars that need to pay
     private CarQueue exitCarQueue; // exit object var for cars that want to exit the garage
-    private SimulatorView simulatorView; // simulatorview object var for checking if the simulator view is true
+    private TestModel simtestmodel; // simulatorview object var for checking if the simulator view is true
 
     private int day = 0;
     private int hour = 0;
@@ -49,7 +49,7 @@ public class Simulator {
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30, 100);
+        simtestmodel = new TestModel(3, 6, 30, 100);
     }
 
     public void run() {
@@ -101,9 +101,9 @@ public class Simulator {
     }
     
     private void updateViews(){
-    	simulatorView.tick();
+    	simtestmodel.tick();
         // Update the car park view.
-        simulatorView.updateView();	
+        simtestmodel.updateView();	
     }
     
     private void carsArriving(){

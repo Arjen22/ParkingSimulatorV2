@@ -27,8 +27,8 @@ public class Model extends GeneralModel implements Runnable {
 	private CarQueue entrancePassQueue; // entrance object var for cars that go through the queue and enter the garage
 	private CarQueue paymentCarQueue; // entrance object var for cars that need to pay
 	private CarQueue exitCarQueue; // exit object var for cars that want to exit the garage
-	private Model SimulatorModel; // simulatormodel object var for the simulator model
-	private JFrame guiframe;
+	private TestModel SimulatorModel; // simulator model object var for the simulator model
+	private JFrame guiframe; 
 	private JPanel screen;
 	private CarparkView cpview;
 	private Controller simcontroller;
