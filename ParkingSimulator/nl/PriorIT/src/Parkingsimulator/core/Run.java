@@ -21,19 +21,6 @@ public class Run {
     {
         return testmodel1;
     }
-
-public class Run {
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-	new BasicStructure();
-		
-	}
-
-
-
     
 
 }

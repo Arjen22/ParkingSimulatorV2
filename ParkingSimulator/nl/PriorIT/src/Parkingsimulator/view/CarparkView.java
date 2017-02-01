@@ -7,32 +7,6 @@ import java.awt.Image;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
-<<<<<<< HEAD
-import nl.PriorIT.src.Parkingsimulator.core.Run;
-import nl.PriorIT.src.Parkingsimulator.logic.Model;
-import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
-
-public class CarparkView extends GeneralView {
-    
-    private static final long serialVersionUID = 108804;
-    
-    private Dimension size;
-    private Image carParkImage;   
-    private static int numberOfFloors;
-    private static int numberOfRows;
-    private static int numberOfPlaces;
-    private static int numberOfOpenSpots;
-    private static int abonnementsPlaatsen;
-//  private static int floornumber = 0;
-    private Car[][][] cars;
-    private Location laatsteplek;
-    private int hoeveelheid;
-    
-    public CarparkView(TestModel testmodel1) {
-	super(testmodel1);
-	setSize(200,200);
-=======
-import nl.PriorIT.src.Parkingsimulator.logic.Model;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 public class CarparkView extends GeneralView {
@@ -54,7 +28,6 @@ public class CarparkView extends GeneralView {
     public CarparkView(TestModel SimulatorModel) {
 	super(SimulatorModel);
 	setSize(200, 200);
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulator
 }
     
     

@@ -8,22 +8,14 @@ import nl.PriorIT.src.Parkingsimulator.view.CarparkView;
 import nl.PriorIT.src.Parkingsimulator.view.GeneralView;
 
 public class BasicStructure {
-<<<<<<< HEAD
     private TestModel SimulatorModel;
 	private JFrame screen;
 	private GeneralView cpview;
 	private Controller controller;
 	
-    public BasicStructure() {
-	SimulatorModel = new TestModel(0, 0, 0, 0);
-    controller=new Controller(SimulatorModel);
-    	private TestModel SimulatorModel;
-	private JFrame screen;
-	private GeneralView cpview;
-	private Controller controller;
+	public BasicStructure() {
 	
-    public BasicStructure() {
-    SimulatorModel = new TestModel();
+    SimulatorModel = new TestModel(0, 0, 0, 0);
 	controller=new Controller(SimulatorModel);
 	cpview=new CarparkView(SimulatorModel);
 	screen=new JFrame("Parking Garage Simulator");
