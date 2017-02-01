@@ -3,11 +3,17 @@ package nl.PriorIT.src.Parkingsimulator.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.swing.JFrame;
 
 import nl.PriorIT.src.Parkingsimulator.view.*;
 
 public abstract class GeneralModel extends JFrame {
+=======
+import nl.PriorIT.src.Parkingsimulator.view.*;
+
+public abstract class GeneralModel {
+>>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulator
   
 	private List<GeneralView> views;
 	
