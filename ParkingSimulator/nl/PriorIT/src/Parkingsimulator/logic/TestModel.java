@@ -26,7 +26,6 @@ public class TestModel extends GeneralModel implements Runnable {
 	private Location laatsteplekAbbo;
 	private int hoeveelheidPlaatsen;
 	private boolean modelexists;
-	private TestModel testmodel1;
 
 	/* private int aantalReserveringen;
 	private int reservering;
@@ -38,7 +37,7 @@ public class TestModel extends GeneralModel implements Runnable {
     		this.numberOfPlaces = numberOfPlaces;
     	    this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
     	    hoeveelheidPlaatsen = abonnementsPlaatsen;
-    	    carparkview = new CarparkView(testmodel1);
+    	    carparkview = new CarparkView(this);
     		/*carparkview = new CarparkView(null);
     	    cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
     	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

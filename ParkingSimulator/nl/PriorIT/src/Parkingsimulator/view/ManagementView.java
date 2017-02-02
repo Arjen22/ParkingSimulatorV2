@@ -13,8 +13,8 @@ import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
  */
 public class ManagementView extends GeneralView {
 
-    public ManagementView(TestModel simulatormodel) {
-	super(simulatormodel);
+    public ManagementView(TestModel testmodel1) {
+	super(testmodel1);
 	
     }
 

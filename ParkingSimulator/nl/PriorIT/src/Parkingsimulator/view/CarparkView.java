@@ -13,7 +13,7 @@ public class CarparkView extends GeneralView {
     
     private static final long serialVersionUID = 108804;
     
-    private Dimension size;
+    private Dimension size = getSize();
     private Image carParkImage;   
     private static int numberOfFloors;
     private static int numberOfRows;
