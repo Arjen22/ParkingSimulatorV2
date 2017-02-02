@@ -7,7 +7,6 @@ import java.awt.Image;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
-import nl.PriorIT.src.Parkingsimulator.logic.Model;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 public class CarparkView extends GeneralView {
