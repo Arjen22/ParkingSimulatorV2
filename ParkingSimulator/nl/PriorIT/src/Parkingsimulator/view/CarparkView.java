@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.EmptyStackException;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
@@ -15,22 +16,58 @@ public class CarparkView extends GeneralView {
     
     private Dimension size = getSize();
     private Image carParkImage;   
+ /*
     private static int numberOfFloors;
     private static int numberOfRows;
     private static int numberOfPlaces;
     private static int numberOfOpenSpots;
     private static int abonnementsPlaatsen;
-//  private static int floornumber = 0;
     private Car[][][] cars;
     private Location laatsteplek;
     private int hoeveelheid;
-    
+   */ 
     public CarparkView(TestModel SimulatorModel) {
 	super(SimulatorModel);
 	setSize(200, 200);
-}
+    }
+    
+    /**
+     * Overridden. Tell the GUI manager how big we would like to be.
+     */
+    public Dimension getPreferredSize() {
+        return new Dimension(800, 500);
+    }
+    
+    public void updateView() {
+	    // Create a new car park image if the size has changed.
+	    if (!size.equals(getSize())) {
+	        size = getSize();
+	        carParkImage = createImage(size.width, size.height);
+	    }
+	    
+	    if(carParkImage == null) {
+	        System.out.println("carpark image is leeg");
+	        System.out.println("Poging tot creëren van nieuwe image...");
+	        
+	        try {
+	            if(carParkImage == null)
+	            {
+	        	carParkImage = createImage(size.width, size.height);
+	            }
+	            
+	           System.out.println("Successful at creating image (by checking first for null and instantiating carParkImage implementation)");
+	                
+	        }
+	        catch (NullPointerException nullpointer) {
+	            System.out.println("Carpark image is still null" + nullpointer);
+	        }
+	    }
+	      
+	    }
     
     
+    
+/* 
     public int getNumberOfFloors() {
         return numberOfFloors;
     }
@@ -64,53 +101,14 @@ public class CarparkView extends GeneralView {
             }
         }
     }
-    
-    public void updateView() {
-        // Create a new car park image if the size has changed.
-        if (!size.equals(getSize())) {
-            size = getSize();
-            carParkImage = createImage(size.width, size.height);
-        }
-        Graphics graphics = carParkImage.getGraphics();
-        int openPlekken = getAbonnementsPlaatsen();
-        for(int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for(int row = 0; row < getNumberOfRows(); row++) {
-                for(int place = 0; place < getNumberOfPlaces(); place++) {
-                	Location location = new Location(floor, row, place);
-                	Car car = getCarAt(location);
-                	Color color = Color.white;
-                	if (openPlekken > 0){
-                		color = car == null ? Color.green : car.getColor();
-                	      if (hoeveelheid > 0){
-                	    	  laatsteplek = location;
-                	    	  hoeveelheid--;
-                	      }
-                	      openPlekken--;
-                	}
-                	else {
-                		color = car == null ? color : car.getColor();
-                	}
-                drawPlace(graphics, location, color);
-                }
-            }
-        }
-        repaint();
-    }
-
-
-/**
- * Overridden. Tell the GUI manager how big we would like to be.
- */
-public Dimension getPreferredSize() {
-    return new Dimension(800, 500);
-}
+*/
 
 /**
  * Overridden. The car park view component needs to be redisplayed. Copy the
  * internal image to screen.
  */
 public void paintComponent(Graphics g) {
-    if (carParkImage == null) {
+   if (carParkImage == null) {
         return;
     }
 
@@ -127,6 +125,9 @@ public void paintComponent(Graphics g) {
 /**
  * Paint a place on this car park view in a given color.
  */
+
+
+/*
 private void drawPlace(Graphics graphics, Location location, Color color) {
     graphics.setColor(color);
     graphics.fillRect(
@@ -225,9 +226,32 @@ private boolean locationIsValid(Location location) {
         return false;
     }
     return true;
+}   
+    Graphics graphics = carParkImage.getGraphics();
+    int openPlekken = getAbonnementsPlaatsen();
+    for(int floor = 0; floor < getNumberOfFloors(); floor++) {
+        for(int row = 0; row < getNumberOfRows(); row++) {
+            for(int place = 0; place < getNumberOfPlaces(); place++) {
+            	Location location = new Location(floor, row, place);
+            	Car car = getCarAt(location);
+            	Color color = Color.white;
+            	if (openPlekken > 0){
+            		color = car == null ? Color.green : car.getColor();
+            	      if (hoeveelheid > 0){
+            	    	  laatsteplek = location;
+            	    	  hoeveelheid--;
+            	      }
+            	      openPlekken--;
+            	}
+            	else {
+            		color = car == null ? color : car.getColor();
+            	}
+            drawPlace(graphics, location, color);
+            }
+        }
+    }
+    repaint();
 }
-
 }
-
-
-
+*/
+}
