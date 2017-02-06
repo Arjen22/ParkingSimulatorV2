@@ -136,159 +136,26 @@ public class Controller extends AbstractController implements ActionListener {
         // Update the car park view.
         simulatorview.updateView();	
     }
-    
-    private void tick() {
-    	advanceTime();
-    	handleExit();
+
+        private void tick() {
+    	testmodel1.advanceTime();
+    	testmodel1.handleExit();
     	updateViews();
+    	
     	// Pause.
         try {
             Thread.sleep(tickPause);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    	handleEntrance();
+    	testmodel1.handleEntrance();
     }
-    
-    private void advanceTime(){
-        // Advance the time by one minute.
-        minute++;
-        while (minute > 59) {
-            minute -= 60;
-            hour++;
-        }
-        while (hour > 23) {
-            hour -= 24;
-            day++;
-        }
-        while (day > 6) {
-            day -= 7;
-        }
-
-    }
-
-    private void handleEntrance(){
-    	carsArriving();
-    	carsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);  	
-    }
-    
-    private void handleExit(){
-        carsReadyToLeave();
-        carsPaying();
-        carsLeaving();
-    }
-
-    private void carsEntering(CarQueue queue){
-        int i=0;
-        // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue()>0 && 
-    			getParkingGarageOpenSpots()>0 && 
-    			i<enterSpeed) {
-            Car car = queue.removeCar();
-            Location freeLocation = getFirstFreeLocation();
-            testmodel1.setCarAt(freeLocation, car);
-            i++;
-        }}
-    
-    private void carsReadyToLeave(){
-        // Add leaving cars to the payment queue.
-        Car car = testmodel1.getFirstLeavingCar();
-        while (car!=null) {
-        	if (car.getHasToPay()){
-	            car.setIsPaying(true);
-	            paymentCarQueue.addCar(car);
-        	}
-        	else {
-        		carLeavesSpot(car);
-        	}
-            car = testmodel1.getFirstLeavingCar();
-        }
-    }
-    
-    
-    private void carLeavesSpot(Car car){
-    	testmodel1.removeCarAt(car.getLocation());
-        exitCarQueue.addCar(car);
-    }
-
-    private void carsPaying(){
-        // Let cars pay.
-    	int i=0;
-    	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-            Car car = paymentCarQueue.removeCar();
-            // TODO Handle payment.
-            carLeavesSpot(car);
-            i++;
-    	}
-    }
-    
-    public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getParkingGarageFloors(); floor++) {
-            for (int row = 0; row < getParkingGarageRow(); row++) {
-                for (int place = 0; place < getParkingGaragePlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    if (testmodel1.getCarAt(location) == null) {
-                        return location;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
-    
-    private void carsArriving(){
-    	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
-        addArrivingCars(numberOfCars, AD_HOC);    	
-    	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, PASS);    	
-    }
-    
-    private int getNumberOfCars(int weekDay, int weekend){
-        Random random = new Random();
-
-        // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = day < 5
-                ? weekDay
-                : weekend;
-
-        // Calculate the number of cars that arrive this minute.
-        double standardDeviation = averageNumberOfCarsPerHour * 0.3;
-        double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-        return (int)Math.round(numberOfCarsPerHour / 60);	
-    }
-    
-    private void addArrivingCars(int numberOfCars, String type){
-        // Add the cars to the back of the queue.
-    	switch(type) {
-    	case AD_HOC: 
-            for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new AdHocCar());
-            }
-            break;
-    	case PASS:
-            for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new ParkingPassCar());
-            }
-            break;	            
-    	}
-    }
-    
-    private void carsLeaving(){
-        // Let cars leave.
-    	int i=0;
-    	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
-            exitCarQueue.removeCar();
-            i++;
-    	}	
-    }
-    
 
     @Override
     public void actionPerformed(ActionEvent argPriorIT) {
 	if (argPriorIT.getSource()==startbutton) {
 		testmodel1.start();
+		tick();
 	}
 	
 	if (argPriorIT.getSource()==stopbutton) {

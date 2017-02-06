@@ -4,12 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.util.Random;
 
 import nl.PriorIT.src.Parkingsimulator.controller.Controller;
 import nl.PriorIT.src.Parkingsimulator.core.Simulator;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
+import nl.PriorIT.src.Parkingsimulator.maths.AdHocCar;
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
+import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
+import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
 
 public class TestView extends GeneralView {
     
@@ -17,12 +22,19 @@ public class TestView extends GeneralView {
     private Dimension mainframesize;
     private Image carparkimage; 
     private Controller controller;
+
+
+    int weekDayArrivals= 100; // average number of arriving cars per hour
+    int weekendArrivals = 200; // average number of arriving cars per hour
+    int weekDayPassArrivals= 50; // average number of arriving cars per hour
+    int weekendPassArrivals = 5; // average number of arriving cars per hour
+    
     /**
      * Is the constructor of the testview and has the variable testmodel1 as it's reference to the object of testmodel.
      */
     public TestView(TestModel testmodel1) {
 	super(testmodel1);
-	setSize(200,200);
+	setSize(800,600);
 	mainframesize = new Dimension(0, 0);
     }
     
@@ -97,8 +109,7 @@ public class TestView extends GeneralView {
                 10 - 1); // TODO use dynamic size or constants
     }
     
-    
-    public void tick() {
+   public void tick() {
         for (int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
             for (int row = 0; row < controller.getParkingGarageRow(); row++) {
                 for (int place = 0; place < controller.getParkingGaragePlaces(); place++) {
@@ -110,8 +121,5 @@ public class TestView extends GeneralView {
                 }
             }
         }
+      }
     }
-    
-    
-
-}
