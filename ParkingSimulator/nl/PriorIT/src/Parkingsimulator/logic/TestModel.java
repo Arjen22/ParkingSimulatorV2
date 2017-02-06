@@ -1,6 +1,9 @@
 package nl.PriorIT.src.Parkingsimulator.logic;
 
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import nl.PriorIT.src.Parkingsimulator.view.GeneralView;
@@ -38,6 +41,10 @@ public class TestModel extends GeneralModel implements Runnable {
     		this.abonnementsPlaatsen = abonnementsPlaatsen;
     		hoeveelheidPlaatsen = abonnementsPlaatsen;
     		cpview = new TestView(this);
+    	        Container contentPane = getContentPane();
+    	        contentPane.add(cpview, BorderLayout.CENTER);
+    	        pack();
+    	        setVisible(true);
     		
     	    updateView();
     	    

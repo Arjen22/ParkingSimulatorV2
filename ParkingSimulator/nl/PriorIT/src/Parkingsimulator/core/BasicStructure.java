@@ -17,8 +17,8 @@ public class BasicStructure {
 	
 	public BasicStructure() {
 	
-	testmodel1 = new TestModel(3,6,30,100);
 	controller=new Controller(testmodel1);
+	testmodel1 = new TestModel(3,6,30,100);
 	cpview=new TestView(testmodel1);
 	screen=new JFrame("Parking Garage Simulator");
 	screen.setSize(800, 500);
