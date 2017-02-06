@@ -4,7 +4,7 @@
  */
 package nl.PriorIT.src.Parkingsimulator.view;
 
-import nl.PriorIT.src.Parkingsimulator.logic.Model;
+import nl.PriorIT.src.Parkingsimulator.features.Model;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 /**

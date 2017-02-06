@@ -1,4 +1,4 @@
-package nl.PriorIT.src.Parkingsimulator.view;
+package nl.PriorIT.src.Parkingsimulator.features;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +8,7 @@ import java.util.EmptyStackException;
 
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
+import nl.PriorIT.src.Parkingsimulator.view.GeneralView;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 public class CarparkView extends GeneralView {
@@ -17,17 +18,12 @@ public class CarparkView extends GeneralView {
     private Dimension size = getSize();
     private Image carParkImage;   
  /*
-    private static int numberOfFloors;
-    private static int numberOfRows;
-    private static int numberOfPlaces;
-    private static int numberOfOpenSpots;
-    private static int abonnementsPlaatsen;
     private Car[][][] cars;
     private Location laatsteplek;
     private int hoeveelheid;
    */ 
-    public CarparkView(TestModel SimulatorModel) {
-	super(SimulatorModel);
+    public CarparkView(TestModel testmodel1) {
+	super(testmodel1);
 	setSize(200, 200);
     }
     
@@ -44,7 +40,9 @@ public class CarparkView extends GeneralView {
 	        size = getSize();
 	        carParkImage = createImage(size.width, size.height);
 	    }
-	    
+	    else {
+		repaint();
+	    }
 	    if(carParkImage == null) {
 	        System.out.println("carpark image is leeg");
 	        System.out.println("Poging tot creëren van nieuwe image...");
@@ -61,73 +59,16 @@ public class CarparkView extends GeneralView {
 	        catch (NullPointerException nullpointer) {
 	            System.out.println("Carpark image is still null" + nullpointer);
 	        }
-	    }
+	    } 
 	      
 	    }
-    
-    
-    
-/* 
-    public int getNumberOfFloors() {
-        return numberOfFloors;
-    }
-
-    public int getNumberOfRows() {
-        return numberOfRows;
-    }
-
-    public int getNumberOfPlaces() {
-        return numberOfPlaces;
-    }
-
-    public int getNumberOfOpenSpots(){
-    	return numberOfOpenSpots;
-    }
-    
-    public int getAbonnementsPlaatsen() {
-    	return abonnementsPlaatsen;
-    }
-    
-    public void tick() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    Car car = getCarAt(location);
-                    if (car != null) {
-                        car.tick();
-                    }
-                }
-            }
-        }
-    }
-*/
-
-/**
- * Overridden. The car park view component needs to be redisplayed. Copy the
- * internal image to screen.
- */
-public void paintComponent(Graphics g) {
-   if (carParkImage == null) {
-        return;
-    }
-
-    Dimension currentSize = getSize();
-    if (size.equals(currentSize)) {
-        g.drawImage(carParkImage, 0, 0, null);
-    }
-    else {
-        // Rescale the previous image.
-        g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
-    }
-}
 
 /**
  * Paint a place on this car park view in a given color.
  */
 
 
-/*
+
 private void drawPlace(Graphics graphics, Location location, Color color) {
     graphics.setColor(color);
     graphics.fillRect(
@@ -227,31 +168,4 @@ private boolean locationIsValid(Location location) {
     }
     return true;
 }   
-    Graphics graphics = carParkImage.getGraphics();
-    int openPlekken = getAbonnementsPlaatsen();
-    for(int floor = 0; floor < getNumberOfFloors(); floor++) {
-        for(int row = 0; row < getNumberOfRows(); row++) {
-            for(int place = 0; place < getNumberOfPlaces(); place++) {
-            	Location location = new Location(floor, row, place);
-            	Car car = getCarAt(location);
-            	Color color = Color.white;
-            	if (openPlekken > 0){
-            		color = car == null ? Color.green : car.getColor();
-            	      if (hoeveelheid > 0){
-            	    	  laatsteplek = location;
-            	    	  hoeveelheid--;
-            	      }
-            	      openPlekken--;
-            	}
-            	else {
-            		color = car == null ? color : car.getColor();
-            	}
-            drawPlace(graphics, location, color);
-            }
-        }
-    }
-    repaint();
-}
-}
-*/
-}
+   

@@ -1,4 +1,4 @@
-package nl.PriorIT.src.Parkingsimulator.logic;
+package nl.PriorIT.src.Parkingsimulator.features;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -14,7 +14,6 @@ import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
-import nl.PriorIT.src.Parkingsimulator.view.CarparkView;
 import nl.PriorIT.src.Parkingsimulator.view.*;
 
 public class Model extends GeneralModel implements Runnable {

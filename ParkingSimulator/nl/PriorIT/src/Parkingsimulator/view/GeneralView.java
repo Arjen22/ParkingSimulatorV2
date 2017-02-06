@@ -11,7 +11,7 @@ import nl.PriorIT.src.Parkingsimulator.logic.*;
 public abstract class GeneralView extends JPanel {
     private static final long serialVersionUID = 108803;
 
-	private TestModel testmodel1;
+	protected TestModel testmodel1;
 
     
     public GeneralView(TestModel testmodel1) {
