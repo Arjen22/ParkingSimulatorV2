@@ -68,9 +68,9 @@ public class TestView extends GeneralView {
             carparkimage = createImage(mainframesize.width, mainframesize.height);
         }
         Graphics graphics = carparkimage.getGraphics();
-        for(int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
-            for(int row = 0; row < controller.getParkingGarageRow(); row++) {
-                for(int place = 0; place < controller.getParkingGaragePlaces(); place++) {
+        for(int floor = 0; floor < testmodel1.getNumberOfFloors(); floor++) {
+            for(int row = 0; row < testmodel1.getNumberOfRows(); row++) {
+                for(int place = 0; place < testmodel1.getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = testmodel1.getCarAt(location);
                     Color color = car == null ? Color.white : car.getColor();
