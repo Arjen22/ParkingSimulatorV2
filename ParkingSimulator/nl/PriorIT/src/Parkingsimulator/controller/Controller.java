@@ -131,6 +131,9 @@ public class Controller extends AbstractController implements ActionListener {
 	return testmodel1.getAbonnementsPlaatsen();
     }
     
+    /**
+     * Updates the views so that the views are up to date with the latest information
+     */
     private void updateViews(){
     	simulatorview.tick();
         // Update the car park view.

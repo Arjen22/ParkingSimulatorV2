@@ -4,6 +4,7 @@ package nl.PriorIT.src.Parkingsimulator.logic;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
+import nl.PriorIT.src.Parkingsimulator.controller.Controller;
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import nl.PriorIT.src.Parkingsimulator.view.GeneralView;
@@ -18,6 +19,7 @@ public class TestModel extends GeneralModel implements Runnable {
 	private boolean run;
 	
 	private GeneralView cpview;
+	private Controller controller;
 	private int numberOfFloors;
 	private int numberOfRows;
 	private int numberOfPlaces;
@@ -41,7 +43,8 @@ public class TestModel extends GeneralModel implements Runnable {
     		this.abonnementsPlaatsen = abonnementsPlaatsen;
     		hoeveelheidPlaatsen = abonnementsPlaatsen;
     		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-    		this.cpview = cpview;
+    		//cpview=new TestView(testmodel1);
+    		//screen.getContentPane().add(cpview);
     	    
     	}
 	
@@ -153,21 +156,6 @@ public class TestModel extends GeneralModel implements Runnable {
 	    return null;
 	} 
 	
-	public void tick() {
-	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-	   for (int row = 0; row < getNumberOfRows(); row++) {
-	       for (int place = 0; place < getNumberOfPlaces(); place++) {
-	           Location location = new Location(floor, row, place);
-	           Car car = getCarAt(location);
-	           if (car != null) {
-	               car.tick();
-	           }
-	       }
-	   }
-	}
-	} 
-	
-
 	private boolean locationIsValid(Location location) {
 	int floor = location.getFloor();
 	int row = location.getRow();

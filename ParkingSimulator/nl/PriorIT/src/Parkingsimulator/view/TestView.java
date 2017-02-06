@@ -16,12 +16,11 @@ public class TestView extends GeneralView {
     // Waarden van de image van de parking garage en de grootte van het main frame voor de image van de parking garage.
     private Dimension mainframesize;
     private Image carparkimage; 
-    private Controller controller;
     /**
      * Is the constructor of the testview and has the variable testmodel1 as it's reference to the object of testmodel.
      */
-    public TestView(TestModel testmodel1) {
-	super(testmodel1);
+    public TestView(TestModel testmodel1, Controller controller) {
+	super(testmodel1,controller);
 	setSize(200,200);
 	mainframesize = new Dimension(0, 0);
     }
@@ -68,8 +67,8 @@ public class TestView extends GeneralView {
             carparkimage = createImage(mainframesize.width, mainframesize.height);
         }
         Graphics graphics = carparkimage.getGraphics();
-        for(int floor = 0; floor < testmodel1.getNumberOfFloors(); floor++) {
-            for(int row = 0; row < testmodel1.getNumberOfRows(); row++) {
+        for(int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
+            for(int row = 0; row < controller.getParkingGarageRow(); row++) {
                 for(int place = 0; place < testmodel1.getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = testmodel1.getCarAt(location);
@@ -97,7 +96,11 @@ public class TestView extends GeneralView {
                 10 - 1); // TODO use dynamic size or constants
     }
     
-    
+    /**
+     * The tick function of the view.
+     * This tick function scrolls through the parking garage and checks the model for the locations of all the cars.
+     * When the cars have no minutes left they will leave.
+     */
     public void tick() {
         for (int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
             for (int row = 0; row < controller.getParkingGarageRow(); row++) {
