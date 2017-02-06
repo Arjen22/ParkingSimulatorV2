@@ -1,8 +1,6 @@
 package nl.PriorIT.src.Parkingsimulator.logic;
 
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.util.Random;
 
 import nl.PriorIT.src.Parkingsimulator.controller.Controller;
@@ -15,10 +13,9 @@ import nl.PriorIT.src.Parkingsimulator.view.GeneralView;
 import nl.PriorIT.src.Parkingsimulator.view.TestView;
 
 public class TestModel extends GeneralModel implements Runnable {
-	/**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = -4370949333799619713L;
+
 	private int aantal;
 	private boolean run;
 	

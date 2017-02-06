@@ -4,20 +4,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.util.Random;
 
 import nl.PriorIT.src.Parkingsimulator.controller.Controller;
-import nl.PriorIT.src.Parkingsimulator.core.Simulator;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
-import nl.PriorIT.src.Parkingsimulator.maths.AdHocCar;
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
-import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
-import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
 
 public class TestView extends GeneralView {
     
+    private static final long serialVersionUID = 891141471062286728L;
+
     /**
      * Waarden van de image van de parking garage en de grootte van het main frame voor de image van de parking garage.
      */

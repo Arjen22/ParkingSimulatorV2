@@ -4,20 +4,14 @@
  */
 package nl.PriorIT.src.Parkingsimulator.controller;
 
-import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+
 
 import javax.swing.JButton;
 
-import nl.PriorIT.src.Parkingsimulator.maths.AdHocCar;
-import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
-import nl.PriorIT.src.Parkingsimulator.maths.Car;
-import nl.PriorIT.src.Parkingsimulator.maths.Location;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
-import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
-import nl.PriorIT.src.Parkingsimulator.view.TestView;
 
 
 /**
@@ -32,7 +26,6 @@ public class Controller extends AbstractController implements ActionListener {
     // Buttons for the Simulator program
     private JButton startbutton;
     private JButton stopbutton;
-    private TestView cpview;
     
     public Controller(TestModel testmodel1) {
 	super(testmodel1);

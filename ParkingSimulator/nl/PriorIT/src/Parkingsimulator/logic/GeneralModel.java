@@ -12,6 +12,10 @@ public abstract class GeneralModel extends JFrame
 {
 
     	/**
+     * 
+     */
+    private static final long serialVersionUID = -8517912210969521589L;
+	/**
     	 *  Empty List value for General view objects.
     	 */
 	private List<GeneralView> views;
