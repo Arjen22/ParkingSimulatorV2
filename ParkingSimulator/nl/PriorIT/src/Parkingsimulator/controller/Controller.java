@@ -139,19 +139,21 @@ public class Controller extends AbstractController implements ActionListener {
         // Update the car park view.
         simulatorview.updateView();	
     }
-    
-    private void tick() {
-    	advanceTime();
-    	handleExit();
+
+        private void tick() {
+    	testmodel1.advanceTime();
+    	testmodel1.handleExit();
     	updateViews();
+    	
     	// Pause.
         try {
             Thread.sleep(tickPause);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    	handleEntrance();
+    	testmodel1.handleEntrance();
     }
+<<<<<<< HEAD
     
     private void advanceTime(){
         // Advance the time by one minute.
@@ -287,11 +289,14 @@ public class Controller extends AbstractController implements ActionListener {
     	}	
     }
     
+=======
+>>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
 
     @Override
     public void actionPerformed(ActionEvent argPriorIT) {
 	if (argPriorIT.getSource()==startbutton) {
 		testmodel1.start();
+		tick();
 	}
 	
 	if (argPriorIT.getSource()==stopbutton) {
