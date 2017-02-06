@@ -3,7 +3,6 @@ package nl.PriorIT.src.Parkingsimulator.core;
 import javax.swing.JFrame;
 
 import nl.PriorIT.src.Parkingsimulator.controller.Controller;
-import nl.PriorIT.src.Parkingsimulator.features.CarparkView;
 import nl.PriorIT.src.Parkingsimulator.core.Simulator;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 import nl.PriorIT.src.Parkingsimulator.view.GeneralView;

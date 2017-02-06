@@ -183,7 +183,7 @@ public class Controller extends AbstractController implements ActionListener {
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
     	while (queue.carsInQueue()>0 && 
-    		getNumberOfOpenSpots()>0 && 
+    			getParkingGarageOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
             Location freeLocation = getFirstFreeLocation();

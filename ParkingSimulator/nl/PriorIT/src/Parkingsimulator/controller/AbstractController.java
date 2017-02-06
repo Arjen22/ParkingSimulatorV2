@@ -5,7 +5,6 @@ package nl.PriorIT.src.Parkingsimulator.controller;
 
 import javax.swing.JPanel;
 
-import nl.PriorIT.src.Parkingsimulator.features.Model;
 import nl.PriorIT.src.Parkingsimulator.logic.TestModel;
 
 
