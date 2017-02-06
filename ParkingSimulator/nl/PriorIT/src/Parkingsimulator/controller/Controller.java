@@ -83,7 +83,7 @@ public class Controller extends AbstractController implements ActionListener {
     public void actionPerformed(ActionEvent argPriorIT) {
 	if (argPriorIT.getSource()==startbutton) {
 		testmodel1.start();
-		testmodel1.tick();
+		//testmodel1.tick();
 	}
 	
 	if (argPriorIT.getSource()==stopbutton) {

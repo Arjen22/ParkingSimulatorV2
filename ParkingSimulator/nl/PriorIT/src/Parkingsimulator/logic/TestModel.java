@@ -133,7 +133,7 @@ public class TestModel extends GeneralModel implements Runnable {
 	   private void updateViews(){
 	    	simulatorview.tick();
 	        // Update the car park view.
-	        simulatorview.updateView();	
+	        cpview.updateView();	
 	    }
 	   
 	public void tick() {
