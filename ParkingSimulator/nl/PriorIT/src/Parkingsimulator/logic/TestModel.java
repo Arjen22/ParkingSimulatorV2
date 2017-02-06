@@ -41,13 +41,7 @@ public class TestModel extends GeneralModel implements Runnable {
     		this.abonnementsPlaatsen = abonnementsPlaatsen;
     		hoeveelheidPlaatsen = abonnementsPlaatsen;
     		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-    		cpview = new TestView(this);
-    	        Container contentPane = getContentPane();
-    	        contentPane.add(cpview, BorderLayout.CENTER);
-    	        pack();
-    	        setVisible(true);
-    		
-    	    updateView();
+    		this.cpview = cpview;
     	    
     	}
 	

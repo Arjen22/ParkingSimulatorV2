@@ -110,7 +110,7 @@ public class Controller extends AbstractController implements ActionListener {
      */
     
     // #1M Methods which get the values for the controller to update the view.
-    /*
+    
     public int getParkingGarageFloors() {
 	return testmodel1.getNumberOfFloors();
     };
@@ -130,7 +130,7 @@ public class Controller extends AbstractController implements ActionListener {
     public int getParkingGarageAbonnementsPlaatsen() {
 	return testmodel1.getAbonnementsPlaatsen();
     }
-    */
+    
     private void updateViews(){
     	simulatorview.tick();
         // Update the car park view.
