@@ -18,7 +18,9 @@ import nl.PriorIT.src.Parkingsimulator.maths.ParkingPassCar;
 
 public class TestView extends GeneralView {
     
-    // Waarden van de image van de parking garage en de grootte van het main frame voor de image van de parking garage.
+    /**
+     * Waarden van de image van de parking garage en de grootte van het main frame voor de image van de parking garage.
+     */
     private Dimension mainframesize;
     private Image carparkimage; 
     private Controller controller;
@@ -36,6 +38,7 @@ public class TestView extends GeneralView {
     public TestView(TestModel testmodel1, Controller controller) {
 	super(testmodel1,controller);
 	setSize(200,200);
+	mainframesize = new Dimension(0,0);
     }
     public TestView(TestModel testmodel1) {
 	super(testmodel1);
@@ -79,15 +82,19 @@ public class TestView extends GeneralView {
      * Updates the TestView with the new values of the parking garage.
      */
     	public void updateView() {
+
         // Create a new car park image if the size has changed.
         if (!mainframesize.equals(getSize())) {
             mainframesize = getSize();
             carparkimage = createImage(mainframesize.width, mainframesize.height);
         }
         Graphics graphics = carparkimage.getGraphics();
-        for(int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
-            for(int row = 0; row < controller.getParkingGarageRow(); row++) {
-                for(int place = 0; place < testmodel1.getNumberOfPlaces(); place++) {
+   //     for(int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
+        for(int floor = 0; floor < testmodel1.getNumberOfFloors(); floor++) {
+   //         for(int row = 0; row < controller.getParkingGarageRow(); row++) {
+            for(int row = 0; row < testmodel1.getNumberOfRows(); row++) {
+    //            for(int place = 0;  controller.getParkingGaragePlaces() < Places; place++) {
+        	for(int place = 0;  place < testmodel1.getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = testmodel1.getCarAt(location);
                     Color color = car == null ? Color.white : car.getColor();

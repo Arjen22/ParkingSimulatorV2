@@ -22,7 +22,7 @@ public class TestModel extends GeneralModel implements Runnable {
 	private int aantal;
 	private boolean run;
 	
-	private GeneralView cpview;;
+	private GeneralView cpview;
 	private int numberOfFloors;
 	private int numberOfRows;
 	private int numberOfPlaces;
@@ -32,30 +32,29 @@ public class TestModel extends GeneralModel implements Runnable {
 	private Location laatsteplek;
 	private int hoeveelheidPlaatsen;
 	private static final String AD_HOC = "1";
-    private static final String PASS = "2";
-    private Controller controller;
+	private static final String PASS = "2";
+	private Controller controller;
     
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
+	int enterSpeed = 3; // number of cars that can enter per minute
+	int paymentSpeed = 7; // number of cars that can pay per minute
+	int exitSpeed = 5; // number of cars that can leave per minute
 
-    int weekDayArrivals= 100; // average number of arriving cars per hour
-    int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
+	int weekDayArrivals= 100; // average number of arriving cars per hour
+	int weekendArrivals = 200; // average number of arriving cars per hour
+	int weekDayPassArrivals= 50; // average number of arriving cars per hour
+	int weekendPassArrivals = 5; // average number of arriving cars per hour
     
-    private CarQueue entranceCarQueue; // entrance object var for counting cars that want to enter
-    private CarQueue entrancePassQueue; // entrance object var for cars that go through the queue and enter the garage
-    private CarQueue paymentCarQueue; // entrance object var for cars that need to pay
-    private CarQueue exitCarQueue; // exit object var for cars that want to exit the garage
-    private TestView simulatorview; // simulatorview object var for checking if the simulator view is true
+	private CarQueue entranceCarQueue; // entrance object var for counting cars that want to enter
+	private CarQueue entrancePassQueue; // entrance object var for cars that go through the queue and enter the garage
+	private CarQueue paymentCarQueue; // entrance object var for cars that need to pay
+	private CarQueue exitCarQueue; // exit object var for cars that want to exit the garage
+	private TestView simulatorview; // simulatorview object var for checking if the simulator view is true
     
     
-    private int day = 0;
-    private int hour = 0;
-    private int minute = 0;
-
-    private int tickPause = 100;
+	private int day = 0;
+	private int hour = 0;
+	private int minute = 0;
+	private int tickPause = 100;
 	
 	
 	// private static int floornumber = 0; NOT BEING USED YET Has to be implemented for management information view
@@ -71,8 +70,10 @@ public class TestModel extends GeneralModel implements Runnable {
     		this.abonnementsPlaatsen = abonnementsPlaatsen;
     		hoeveelheidPlaatsen = abonnementsPlaatsen;
     		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-    		//cpview=new TestView(testmodel1);
-    		//screen.getContentPane().add(cpview);
+    		entranceCarQueue = new CarQueue();
+    		entrancePassQueue = new CarQueue();
+    		paymentCarQueue = new CarQueue();
+    		exitCarQueue = new CarQueue();
     	}
 	
 	// returns the number of views.
@@ -96,6 +97,11 @@ public class TestModel extends GeneralModel implements Runnable {
 		run=false;
 	}
 	
+	    
+	public void updateView() {
+		cpview.updateView();
+	}
+	
 	@Override
 	public void run() {
 		run=true;
@@ -106,10 +112,6 @@ public class TestModel extends GeneralModel implements Runnable {
 			} catch (Exception e) {} 
 		}
 	}
-	
-	   public void updateView() {
-		cpview.updateView();
-	    }
 	 
 	public int getNumberOfFloors() {
 	    return numberOfFloors;
@@ -137,7 +139,7 @@ public class TestModel extends GeneralModel implements Runnable {
 	        simulatorview.updateView();	
 	    }
 	   
-	private void tick() {
+	public void tick() {
     	advanceTime();
     	handleExit();
     	updateViews();
@@ -182,15 +184,18 @@ public class TestModel extends GeneralModel implements Runnable {
 
     private void carsEntering(CarQueue queue){
         int i=0;
-        // Remove car from the front of the queue and assign to a parking space.
+        /**
+         *  Remove car from the front of the queue and assign to a parking space.
+         */
     	while (queue.carsInQueue()>0 && 
-    			controller.getParkingGarageOpenSpots()>0 && 
+    			this.getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
-            Car car = queue.removeCar();
-            Location freeLocation = getFirstFreeLocation();
-            this.setCarAt(freeLocation, car);
-            i++;
-        }}
+    	    		Car car = queue.removeCar();
+    	    		Location freeLocation = this.getFirstFreeLocation();
+    	    		this.setCarAt(freeLocation, car);
+    	    		i++;
+        }
+    }
     
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
@@ -218,7 +223,6 @@ public class TestModel extends GeneralModel implements Runnable {
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            // TODO Handle payment.
             carLeavesSpot(car);
             i++;
     	}
