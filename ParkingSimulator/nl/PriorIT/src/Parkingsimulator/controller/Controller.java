@@ -153,7 +153,6 @@ public class Controller extends AbstractController implements ActionListener {
         }
     	testmodel1.handleEntrance();
     }
-<<<<<<< HEAD
     
     private void advanceTime(){
         // Advance the time by one minute.
@@ -288,9 +287,6 @@ public class Controller extends AbstractController implements ActionListener {
             i++;
     	}	
     }
-    
-=======
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
 
     @Override
     public void actionPerformed(ActionEvent argPriorIT) {

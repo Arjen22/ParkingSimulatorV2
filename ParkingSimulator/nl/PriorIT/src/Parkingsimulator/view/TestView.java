@@ -21,8 +21,6 @@ public class TestView extends GeneralView {
     // Waarden van de image van de parking garage en de grootte van het main frame voor de image van de parking garage.
     private Dimension mainframesize;
     private Image carparkimage; 
-<<<<<<< HEAD
-=======
     private Controller controller;
 
 
@@ -31,19 +29,17 @@ public class TestView extends GeneralView {
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
     
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
-    /**
+/**
      * Is the constructor of the testview and has the variable testmodel1 as it's reference to the object of testmodel.
      */
-<<<<<<< HEAD
+
     public TestView(TestModel testmodel1, Controller controller) {
 	super(testmodel1,controller);
 	setSize(200,200);
-=======
+    }
     public TestView(TestModel testmodel1) {
 	super(testmodel1);
 	setSize(800,600);
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
 	mainframesize = new Dimension(0, 0);
     }
     
@@ -118,16 +114,12 @@ public class TestView extends GeneralView {
                 10 - 1); // TODO use dynamic size or constants
     }
     
-<<<<<<< HEAD
     /**
      * The tick function of the view.
      * This tick function scrolls through the parking garage and checks the model for the locations of all the cars.
      * When the cars have no minutes left they will leave.
      */
     public void tick() {
-=======
-   public void tick() {
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
         for (int floor = 0; floor < controller.getParkingGarageFloors(); floor++) {
             for (int row = 0; row < controller.getParkingGarageRow(); row++) {
                 for (int place = 0; place < controller.getParkingGaragePlaces(); place++) {

@@ -6,10 +6,7 @@ import java.awt.Container;
 import java.util.Random;
 
 import nl.PriorIT.src.Parkingsimulator.controller.Controller;
-<<<<<<< HEAD
-=======
 import nl.PriorIT.src.Parkingsimulator.maths.AdHocCar;
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
 import nl.PriorIT.src.Parkingsimulator.maths.Car;
 import nl.PriorIT.src.Parkingsimulator.maths.CarQueue;
 import nl.PriorIT.src.Parkingsimulator.maths.Location;
@@ -25,8 +22,7 @@ public class TestModel extends GeneralModel implements Runnable {
 	private int aantal;
 	private boolean run;
 	
-	private GeneralView cpview;
-	private Controller controller;
+	private GeneralView cpview;;
 	private int numberOfFloors;
 	private int numberOfRows;
 	private int numberOfPlaces;
@@ -75,12 +71,8 @@ public class TestModel extends GeneralModel implements Runnable {
     		this.abonnementsPlaatsen = abonnementsPlaatsen;
     		hoeveelheidPlaatsen = abonnementsPlaatsen;
     		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-<<<<<<< HEAD
     		//cpview=new TestView(testmodel1);
     		//screen.getContentPane().add(cpview);
-=======
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
-    	    
     	}
 	
 	// returns the number of views.
@@ -341,13 +333,8 @@ public class TestModel extends GeneralModel implements Runnable {
 		}
 	    }
 	    return null;
-<<<<<<< HEAD
-	} 
-	
-=======
-	} 	
+	}
 
->>>>>>> branch 'master' of https://github.com/Arjen22/ParkingSimulatorV2
 	private boolean locationIsValid(Location location) {
 	int floor = location.getFloor();
 	int row = location.getRow();
